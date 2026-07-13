@@ -17,20 +17,18 @@ export const TopBar = () => {
       </div>
 
       <div className='flex items-center gap-2'>
-        {process.env.NODE_ENV === 'development' && (
-          <Button
-            variant='ghost'
-            size='icon'
-            onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
-            aria-label={t('toggleTheme')}
-          >
-            {resolvedTheme === 'dark' ? (
-              <Sun className='h-4 w-4' />
-            ) : (
-              <Moon className='h-4 w-4' />
-            )}
-          </Button>
-        )}
+        <Button
+          variant='ghost'
+          size='icon'
+          onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
+          aria-label={t('toggleTheme')}
+        >
+          {resolvedTheme === 'dark' ? (
+            <Sun className='h-4 w-4' />
+          ) : (
+            <Moon className='h-4 w-4' />
+          )}
+        </Button>
 
         <Button
           variant='ghost'
