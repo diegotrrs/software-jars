@@ -1,0 +1,33 @@
+{
+  "nav": {
+    "home": "Home",
+    "settings": "Settings"
+  },
+  "topBar": {
+    "appName": "Software Jars",
+    "toggleTheme": "Toggle theme",
+    "language": "Language"
+  },
+  "home": {
+    "jarsSectionTitle": "Jars",
+    "jarsSectionDescription": "Small apps that each do one thing."
+  },
+  "jars": {
+    "diceRoller": {
+      "name": "Dice Roller",
+      "description": "Roll a handful of dice for your next tabletop session."
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "comingSoon": "Nothing to configure here yet."
+  },
+  "diceRoller": {
+    "sidesLabel": "Dice sides",
+    "countLabel": "Number of dice",
+    "rollButton": "Roll",
+    "rolling": "Rolling…",
+    "total": "Total",
+    "resultsLabel": "Results"
+  }
+}
