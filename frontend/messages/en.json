@@ -16,6 +16,10 @@
     "diceRoller": {
       "name": "Dice Roller",
       "description": "Roll a handful of dice for your next tabletop session."
+    },
+    "ideaBoard": {
+      "name": "Idea Board",
+      "description": "Organise ideas into columns using sticky notes."
     }
   },
   "settings": {
@@ -29,5 +33,23 @@
     "rolling": "Rolling…",
     "total": "Total",
     "resultsLabel": "Results"
+  },
+  "ideaBoard": {
+    "newBoard": "New board",
+    "noBoards": "No boards yet. Create one to start organising ideas.",
+    "untitledBoard": "Untitled board",
+    "boardNotFound": "This board doesn't exist or was deleted.",
+    "backToBoards": "Boards",
+    "deleteBoard": "Delete board",
+    "deleteBoardConfirm": "Delete \"{name}\" and everything in it? This can't be undone.",
+    "columnCount": "{count, plural, one {# column} other {# columns}}",
+    "addColumn": "Add column",
+    "untitledColumn": "Untitled column",
+    "deleteColumn": "Delete column",
+    "deleteColumnConfirm": "Delete \"{title}\" and its {count, plural, one {# idea} other {# ideas}}?",
+    "addSticker": "Add sticker",
+    "deleteSticker": "Delete sticker",
+    "pack": "Drag a sticker from here",
+    "stickerPlaceholder": "Type an idea…"
   }
 }

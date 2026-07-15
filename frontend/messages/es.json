@@ -1,0 +1,55 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "settings": "Ajustes"
+  },
+  "topBar": {
+    "appName": "Software Jars",
+    "toggleTheme": "Cambiar tema",
+    "language": "Idioma"
+  },
+  "home": {
+    "jarsSectionTitle": "Tarros",
+    "jarsSectionDescription": "Aplicaciones pequeñas que hacen una sola cosa."
+  },
+  "jars": {
+    "diceRoller": {
+      "name": "Lanzador de Dados",
+      "description": "Lanza un puñado de dados para tu próxima partida de mesa."
+    },
+    "ideaBoard": {
+      "name": "Tablero de Ideas",
+      "description": "Organiza ideas en columnas usando notas adhesivas."
+    }
+  },
+  "settings": {
+    "title": "Ajustes",
+    "comingSoon": "Todavía no hay nada que configurar aquí."
+  },
+  "diceRoller": {
+    "sidesLabel": "Caras del dado",
+    "countLabel": "Número de dados",
+    "rollButton": "Lanzar",
+    "rolling": "Lanzando…",
+    "total": "Total",
+    "resultsLabel": "Resultados"
+  },
+  "ideaBoard": {
+    "newBoard": "Nuevo tablero",
+    "noBoards": "Todavía no hay tableros. Crea uno para empezar a organizar ideas.",
+    "untitledBoard": "Tablero sin título",
+    "boardNotFound": "Este tablero no existe o fue eliminado.",
+    "backToBoards": "Tableros",
+    "deleteBoard": "Eliminar tablero",
+    "deleteBoardConfirm": "¿Eliminar \"{name}\" y todo su contenido? Esta acción no se puede deshacer.",
+    "columnCount": "{count, plural, one {# columna} other {# columnas}}",
+    "addColumn": "Añadir columna",
+    "untitledColumn": "Columna sin título",
+    "deleteColumn": "Eliminar columna",
+    "deleteColumnConfirm": "¿Eliminar \"{title}\" y {count, plural, one {su # idea} other {sus # ideas}}?",
+    "addSticker": "Añadir nota",
+    "deleteSticker": "Eliminar nota",
+    "pack": "Arrastra una nota desde aquí",
+    "stickerPlaceholder": "Escribe una idea…"
+  }
+}

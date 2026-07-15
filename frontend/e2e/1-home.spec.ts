@@ -31,4 +31,14 @@ test.describe('@1. home', () => {
     await page.waitForURL('/settings');
     await expect(page.getByRole('heading', { name: /settings/i })).toBeVisible();
   });
+
+  test('@1.5 switching language to Spanish translates the page and persists across navigation', async ({ page }) => {
+    await page.getByTestId('language-switcher').click();
+    await page.getByRole('option', { name: 'Español' }).click();
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Tarros');
+
+    await page.getByTestId('jar-dice-roller').click();
+    await page.waitForURL('/jars/dice-roller');
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Lanzador de Dados');
+  });
 });
