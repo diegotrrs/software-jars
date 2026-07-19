@@ -7,12 +7,16 @@ export const PACK_DRAG_ID = 'pack';
 
 // The "infinite pack" — a fixed drag source that never depletes. Dropping it
 // on a column spawns a brand-new sticker there; the pack itself never moves.
+// Hidden below md: on narrow/mobile viewports it ate too much horizontal
+// space relative to the columns — the per-column "+" button is the mobile
+// path for adding a sticker there, same md breakpoint the nav already uses
+// to split desktop/mobile.
 export const StickerPack = () => {
   const t = useTranslations('ideaBoard');
   const { attributes, listeners, setNodeRef, isDragging } = useDraggable({ id: PACK_DRAG_ID });
 
   return (
-    <div className='flex w-28 shrink-0 flex-col items-center gap-3 border-r bg-muted/30 px-3 py-6'>
+    <div className='hidden w-28 shrink-0 flex-col items-center gap-3 border-r bg-muted/30 px-3 py-6 md:flex'>
       <div
         ref={setNodeRef}
         data-testid='sticker-pack'
