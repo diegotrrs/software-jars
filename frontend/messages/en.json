@@ -20,11 +20,27 @@
     "ideaBoard": {
       "name": "Idea Board",
       "description": "Organise ideas into columns using sticky notes."
+    },
+    "ideaMatrix": {
+      "name": "Idea Matrix",
+      "description": "Mix and match variables to brainstorm and score side-project ideas."
     }
   },
   "settings": {
-    "title": "Settings",
-    "comingSoon": "Nothing to configure here yet."
+    "title": "Settings"
+  },
+  "sync": {
+    "title": "Sync across devices",
+    "description": "Link this browser with another device (like your phone) to keep your jars in sync. No account or sign-in required — just a private code shared between your own devices.",
+    "notLinkedStatus": "Not linked yet.",
+    "linkedStatus": "Linked. Changes sync automatically between devices sharing this code.",
+    "generate": "Generate a code",
+    "copy": "Copy",
+    "copied": "Copied!",
+    "linkPlaceholder": "Paste a code from another device",
+    "link": "Link",
+    "reset": "Unlink this device",
+    "resetConfirm": "Stop syncing this device? Your data stays as-is here, but it will no longer stay in sync with your other devices unless you link the same code again."
   },
   "diceRoller": {
     "sidesLabel": "Dice sides",
@@ -51,5 +67,37 @@
     "deleteSticker": "Delete sticker",
     "pack": "Drag a sticker from here",
     "stickerPlaceholder": "Type an idea…"
+  },
+  "ideaMatrix": {
+    "newProject": "New project",
+    "noProjects": "No projects yet. Create one to start brainstorming variables.",
+    "untitledProject": "Untitled project",
+    "projectNotFound": "This project doesn't exist or was deleted.",
+    "backToProjects": "Projects",
+    "deleteProject": "Delete project",
+    "deleteProjectConfirm": "Delete \"{name}\" and everything in it? This can't be undone.",
+    "axisCount": "{count, plural, one {# variable} other {# variables}}",
+    "candidateCount": "{count, plural, one {# idea} other {# ideas}}",
+    "axesTitle": "Variables",
+    "addAxis": "Add variable",
+    "untitledAxis": "Untitled variable",
+    "deleteAxis": "Delete variable",
+    "addOption": "Add option",
+    "addOptionPlaceholder": "e.g. vintage, nerd, couples…",
+    "deleteOption": "Delete option",
+    "candidatesTitle": "Ideas",
+    "addCandidate": "Add idea",
+    "noCandidates": "No ideas yet. Add one and pick an option from each variable.",
+    "untitledCandidate": "Untitled idea",
+    "deleteCandidate": "Delete idea",
+    "candidateName": "Idea",
+    "pickOption": "—",
+    "demand": "Demand",
+    "competition": "Competition",
+    "effort": "Effort",
+    "differentiation": "Differentiation",
+    "score": "Score",
+    "notes": "Notes",
+    "notesPlaceholder": "Why this score?"
   }
 }

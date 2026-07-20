@@ -1,3 +1,5 @@
+import { createLocalStorageStore } from '@/lib/local-storage-store';
+
 const STORAGE_KEY = 'software-jars:idea-board';
 
 export type Sticker = {
@@ -22,46 +24,13 @@ type IdeaBoardState = {
   boards: Board[];
 };
 
-const EMPTY_STATE: IdeaBoardState = { boards: [] };
+const store = createLocalStorageStore<IdeaBoardState>(STORAGE_KEY, { boards: [] }, { syncNamespace: 'idea-board' });
 
-const listeners = new Set<() => void>();
-let cachedState: IdeaBoardState | null = null;
-
-const readFromStorage = (): IdeaBoardState => {
-  if (typeof window === 'undefined') return EMPTY_STATE;
-  try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
-    return raw ? (JSON.parse(raw) as IdeaBoardState) : EMPTY_STATE;
-  } catch {
-    return EMPTY_STATE;
-  }
-};
-
-const emit = () => listeners.forEach((listener) => listener());
-
-const writeState = (state: IdeaBoardState): void => {
-  cachedState = state;
-  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-  emit();
-};
-
-export const subscribe = (listener: () => void): (() => void) => {
-  listeners.add(listener);
-  return () => listeners.delete(listener);
-};
-
-export const getSnapshot = (): IdeaBoardState => {
-  if (cachedState === null) cachedState = readFromStorage();
-  return cachedState;
-};
-
-export const getServerSnapshot = (): IdeaBoardState => EMPTY_STATE;
-
-// Only for tests — clears the module-level cache + localStorage so each test starts fresh.
-export const resetIdeaBoardStoreForTests = (): void => {
-  cachedState = null;
-  if (typeof window !== 'undefined') window.localStorage.removeItem(STORAGE_KEY);
-};
+export const subscribe = store.subscribe;
+export const getSnapshot = store.getSnapshot;
+export const getServerSnapshot = store.getServerSnapshot;
+export const resetIdeaBoardStoreForTests = store.resetForTests;
+const writeState = store.writeState;
 
 const generateId = (): string =>
   typeof crypto !== 'undefined' && 'randomUUID' in crypto

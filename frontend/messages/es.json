@@ -20,11 +20,27 @@
     "ideaBoard": {
       "name": "Tablero de Ideas",
       "description": "Organiza ideas en columnas usando notas adhesivas."
+    },
+    "ideaMatrix": {
+      "name": "Matriz de Ideas",
+      "description": "Combina variables para generar y puntuar ideas de proyectos secundarios."
     }
   },
   "settings": {
-    "title": "Ajustes",
-    "comingSoon": "Todavía no hay nada que configurar aquí."
+    "title": "Ajustes"
+  },
+  "sync": {
+    "title": "Sincronizar entre dispositivos",
+    "description": "Vincula este navegador con otro dispositivo (como tu teléfono) para mantener tus tarros sincronizados. No se necesita cuenta ni inicio de sesión, solo un código privado compartido entre tus propios dispositivos.",
+    "notLinkedStatus": "Todavía no está vinculado.",
+    "linkedStatus": "Vinculado. Los cambios se sincronizan automáticamente entre los dispositivos que comparten este código.",
+    "generate": "Generar un código",
+    "copy": "Copiar",
+    "copied": "¡Copiado!",
+    "linkPlaceholder": "Pega un código de otro dispositivo",
+    "link": "Vincular",
+    "reset": "Desvincular este dispositivo",
+    "resetConfirm": "¿Dejar de sincronizar este dispositivo? Tus datos se conservan aquí tal como están, pero dejarán de mantenerse sincronizados con tus otros dispositivos a menos que vincules el mismo código de nuevo."
   },
   "diceRoller": {
     "sidesLabel": "Caras del dado",
@@ -51,5 +67,37 @@
     "deleteSticker": "Eliminar nota",
     "pack": "Arrastra una nota desde aquí",
     "stickerPlaceholder": "Escribe una idea…"
+  },
+  "ideaMatrix": {
+    "newProject": "Nuevo proyecto",
+    "noProjects": "Todavía no hay proyectos. Crea uno para empezar a combinar variables.",
+    "untitledProject": "Proyecto sin título",
+    "projectNotFound": "Este proyecto no existe o fue eliminado.",
+    "backToProjects": "Proyectos",
+    "deleteProject": "Eliminar proyecto",
+    "deleteProjectConfirm": "¿Eliminar \"{name}\" y todo su contenido? Esta acción no se puede deshacer.",
+    "axisCount": "{count, plural, one {# variable} other {# variables}}",
+    "candidateCount": "{count, plural, one {# idea} other {# ideas}}",
+    "axesTitle": "Variables",
+    "addAxis": "Añadir variable",
+    "untitledAxis": "Variable sin título",
+    "deleteAxis": "Eliminar variable",
+    "addOption": "Añadir opción",
+    "addOptionPlaceholder": "ej. vintage, frikis, parejas…",
+    "deleteOption": "Eliminar opción",
+    "candidatesTitle": "Ideas",
+    "addCandidate": "Añadir idea",
+    "noCandidates": "Todavía no hay ideas. Añade una y elige una opción de cada variable.",
+    "untitledCandidate": "Idea sin título",
+    "deleteCandidate": "Eliminar idea",
+    "candidateName": "Idea",
+    "pickOption": "—",
+    "demand": "Demanda",
+    "competition": "Competencia",
+    "effort": "Esfuerzo",
+    "differentiation": "Diferenciación",
+    "score": "Puntuación",
+    "notes": "Notas",
+    "notesPlaceholder": "¿Por qué esta puntuación?"
   }
 }

@@ -1,4 +1,4 @@
-import { Dices, StickyNote, type LucideIcon } from 'lucide-react';
+import { Dices, Grid3x3, StickyNote, type LucideIcon } from 'lucide-react';
 
 export type Jar = {
   id: string;
@@ -25,5 +25,13 @@ export const jars: Jar[] = [
     href: '/jars/idea-board',
     icon: StickyNote,
     testId: 'jar-idea-board',
+  },
+  {
+    id: 'idea-matrix',
+    nameKey: 'jars.ideaMatrix.name',
+    descriptionKey: 'jars.ideaMatrix.description',
+    href: '/jars/idea-matrix',
+    icon: Grid3x3,
+    testId: 'jar-idea-matrix',
   },
 ];
