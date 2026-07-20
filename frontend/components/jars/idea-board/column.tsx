@@ -56,9 +56,9 @@ export const Column = ({
       ref={setSortableRef}
       style={style}
       data-testid='column'
-      className={cn('flex w-64 shrink-0 flex-col rounded-lg border bg-background', isDragging && 'opacity-50')}
+      className={cn('flex h-full w-64 shrink-0 flex-col rounded-lg border bg-background', isDragging && 'opacity-50')}
     >
-      <div className='flex items-center gap-1 border-b p-2'>
+      <div className='flex shrink-0 items-center gap-1 border-b p-2'>
         <span
           {...attributes}
           {...listeners}
@@ -89,7 +89,13 @@ export const Column = ({
       <div
         ref={setDroppableRef}
         data-testid='column-body'
-        className={cn('flex min-h-24 flex-1 flex-col items-center gap-3 p-3', isOver && 'bg-accent/40')}
+        className={cn(
+          // min-h-0 overrides the flex default of min-height:auto, which would
+          // otherwise let this box keep growing with content instead of
+          // clipping + scrolling within the column's fixed h-full height.
+          'flex min-h-0 flex-1 flex-col items-center gap-3 overflow-y-auto p-3',
+          isOver && 'bg-accent/40'
+        )}
       >
         {column.stickers.map((sticker) => (
           <Sticker
@@ -107,7 +113,7 @@ export const Column = ({
       <Button
         variant='ghost'
         size='sm'
-        className='m-2 mt-0 justify-start gap-1 text-muted-foreground'
+        className='m-2 mt-0 shrink-0 justify-start gap-1 text-muted-foreground'
         onClick={onAddSticker}
         data-testid='add-sticker'
       >
