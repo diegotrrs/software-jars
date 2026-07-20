@@ -8,11 +8,10 @@ import { usePathname } from 'next/navigation';
 export const MobileBottomNav = () => {
   const pathname  = usePathname();
   const t = useTranslations('nav');
-  const mainItems = navItems.filter((i) => i.section === 'main');
 
   return (
     <nav className='fixed bottom-0 left-0 right-0 z-50 flex h-16 items-center border-t bg-background md:hidden'>
-      {mainItems.map((item) => {
+      {navItems.map((item) => {
         const Icon     = item.icon;
         const isActive = pathname === item.href;
         const label    = t(item.labelKey);
