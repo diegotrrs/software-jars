@@ -50,7 +50,16 @@ export const attachRemoteSync = <T>(jarNamespace: string, store: SyncableStore<T
       const res = await fetch(`/api/sync/${jarNamespace}/${code}`);
       if (!res.ok) return;
       const body = (await res.json()) as SyncEnvelope<T>;
-      if (body.data === null || body.updatedAt === null) return;
+
+      if (body.data === null || body.updatedAt === null) {
+        // Nothing stored under this code for this jar yet — seed the server
+        // with whatever's already local, so a second device linking the same
+        // code actually finds something instead of silently waiting for the
+        // next edit on this device to trigger a push.
+        push();
+        return;
+      }
+
       if (lastSyncedAt !== null && body.updatedAt <= lastSyncedAt) return;
 
       applyingRemote = true;

@@ -59,7 +59,7 @@ describe('attachRemoteSync', () => {
     expect(store.getSnapshot()).toEqual(remoteState);
   });
 
-  it('does nothing when the remote has no data stored yet', async () => {
+  it('does not overwrite local data when the remote has nothing stored yet', async () => {
     setSyncCode('abc123');
     const fetchMock = vi.fn().mockResolvedValue({
       ok: true,
@@ -72,6 +72,25 @@ describe('attachRemoteSync', () => {
     await vi.runAllTimersAsync();
 
     expect(store.getSnapshot()).toEqual({ items: ['still-local'] });
+  });
+
+  it('seeds the server with local data when a pull finds nothing stored yet (regression: a device linking a fresh/unused code must actually push its existing data, not silently wait for the next edit)', async () => {
+    setSyncCode('abc123');
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ data: null, updatedAt: null }),
+    });
+    vi.stubGlobal('fetch', fetchMock);
+
+    const store = createMockStore({ items: ['pre-existing-local-data'] });
+    attachRemoteSync('test-jar', store);
+    await vi.runAllTimersAsync();
+
+    const putCalls = fetchMock.mock.calls.filter(([, init]) => (init as RequestInit | undefined)?.method === 'PUT');
+    expect(putCalls).toHaveLength(1);
+    expect(putCalls[0][1]).toEqual(
+      expect.objectContaining({ body: JSON.stringify({ items: ['pre-existing-local-data'] }) })
+    );
   });
 
   it('pushes (debounced) a PUT after a local write', async () => {
