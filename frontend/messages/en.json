@@ -87,6 +87,7 @@
     "deleteOption": "Delete option",
     "candidatesTitle": "Ideas",
     "addCandidate": "Add idea",
+    "addRandomCandidate": "Random",
     "noCandidates": "No ideas yet. Add one and pick an option from each variable.",
     "untitledCandidate": "Untitled idea",
     "deleteCandidate": "Delete idea",

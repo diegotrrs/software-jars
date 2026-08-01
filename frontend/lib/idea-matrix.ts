@@ -161,6 +161,24 @@ export const addCandidate = (projectId: string, name = ''): Candidate => {
   return candidate;
 };
 
+// Same as addCandidate, but pre-fills a random option for every axis that
+// has at least one option (axes with no options are left unselected —
+// nothing to pick from). Only the variable selections are randomized; name,
+// scores, and notes start the same as a regular new candidate.
+export const addRandomCandidate = (projectId: string): Candidate => {
+  const project = getSnapshot().projects.find((p) => p.id === projectId);
+  const selections: Record<string, string> = {};
+  for (const axis of project?.axes ?? []) {
+    if (axis.options.length === 0) continue;
+    const randomOption = axis.options[Math.floor(Math.random() * axis.options.length)];
+    selections[axis.id] = randomOption.id;
+  }
+
+  const candidate: Candidate = { id: generateId(), name: '', selections, scores: { ...DEFAULT_SCORES }, notes: '' };
+  updateProject(projectId, (proj) => ({ ...proj, candidates: [...proj.candidates, candidate] }));
+  return candidate;
+};
+
 export const renameCandidate = (projectId: string, candidateId: string, name: string): void => {
   updateCandidate(projectId, candidateId, (candidate) => ({ ...candidate, name }));
 };

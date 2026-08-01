@@ -3,6 +3,7 @@ import {
   addAxis,
   addAxisOption,
   addCandidate,
+  addRandomCandidate,
   computeScore,
   createProject,
   deleteAxis,
@@ -162,6 +163,40 @@ describe('candidates', () => {
     const candidate = addCandidate(project.id, 'Idea 1');
     setCandidateNotes(project.id, candidate.id, 'Low effort, high margin');
     expect(getProject(project.id)?.candidates[0].notes).toBe('Low effort, high margin');
+  });
+
+  it('addRandomCandidate picks a valid option for every axis that has options', () => {
+    const project = createProject('Project');
+    const niche = addAxis(project.id, 'Niche');
+    const vintage = addAxisOption(project.id, niche.id, 'Vintage');
+    const nerd = addAxisOption(project.id, niche.id, 'Nerd');
+    const audience = addAxis(project.id, 'Audience');
+    const devs = addAxisOption(project.id, audience.id, 'Devs');
+
+    const candidate = addRandomCandidate(project.id);
+
+    expect(Object.keys(candidate.selections).sort()).toEqual([audience.id, niche.id].sort());
+    expect([vintage.id, nerd.id]).toContain(candidate.selections[niche.id]);
+    expect(candidate.selections[audience.id]).toBe(devs.id);
+  });
+
+  it('addRandomCandidate leaves an axis unselected if it has no options', () => {
+    const project = createProject('Project');
+    const empty = addAxis(project.id, 'Empty axis');
+
+    const candidate = addRandomCandidate(project.id);
+
+    expect(candidate.selections[empty.id]).toBeUndefined();
+  });
+
+  it('addRandomCandidate starts with a blank name, default scores, and empty notes — only selections are randomized', () => {
+    const project = createProject('Project');
+    const candidate = addRandomCandidate(project.id);
+
+    expect(candidate.name).toBe('');
+    expect(candidate.scores).toEqual({ demand: 3, competition: 3, effort: 3, differentiation: 3 });
+    expect(candidate.notes).toBe('');
+    expect(getProject(project.id)?.candidates).toEqual([candidate]);
   });
 });
 

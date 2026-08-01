@@ -7,6 +7,7 @@ import {
   addAxis,
   addAxisOption,
   addCandidate,
+  addRandomCandidate,
   deleteAxis,
   deleteAxisOption,
   deleteCandidate,
@@ -20,7 +21,7 @@ import {
   setCandidateSelection,
 } from '@/lib/idea-matrix';
 import { useIdeaMatrixProjects } from '@/lib/use-idea-matrix';
-import { ArrowLeft, Plus } from 'lucide-react';
+import { ArrowLeft, Plus, Shuffle } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -109,15 +110,26 @@ export const ProjectView = ({ projectId }: ProjectViewProps) => {
       <section className='flex flex-col gap-2'>
         <div className='flex items-center justify-between'>
           <h2 className='text-sm font-semibold text-muted-foreground'>{t('candidatesTitle')}</h2>
-          <Button
-            variant='outline'
-            size='sm'
-            className='gap-1'
-            onClick={() => setNewestCandidateId(addCandidate(project.id, '').id)}
-            data-testid='add-candidate'
-          >
-            <Plus className='h-4 w-4' /> {t('addCandidate')}
-          </Button>
+          <div className='flex gap-2'>
+            <Button
+              variant='outline'
+              size='sm'
+              className='gap-1'
+              onClick={() => setNewestCandidateId(addRandomCandidate(project.id).id)}
+              data-testid='add-random-candidate'
+            >
+              <Shuffle className='h-4 w-4' /> {t('addRandomCandidate')}
+            </Button>
+            <Button
+              variant='outline'
+              size='sm'
+              className='gap-1'
+              onClick={() => setNewestCandidateId(addCandidate(project.id, '').id)}
+              data-testid='add-candidate'
+            >
+              <Plus className='h-4 w-4' /> {t('addCandidate')}
+            </Button>
+          </div>
         </div>
 
         {project.candidates.length === 0 ? (

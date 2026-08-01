@@ -84,4 +84,24 @@ test.describe('@3. idea matrix', () => {
     expect(dialogShown).toBe(true);
     await expect(page.getByText('No projects yet')).toBeVisible();
   });
+
+  test('@3.7 the Random button adds a row with a valid option picked for every variable', async ({ page }) => {
+    await page.getByTestId('new-project').click();
+    await page.waitForURL(/\/jars\/idea-matrix\/.+/);
+
+    await page.getByTestId('add-axis').click();
+    await page.locator('input[data-testid="axis-name"]').fill('Niche');
+    await page.locator('input[data-testid="axis-name"]').blur();
+    await page.locator('input[data-testid="new-axis-option"]').fill('Vintage');
+    await page.getByTestId('add-axis-option').click();
+
+    await page.getByTestId('add-random-candidate').click();
+
+    await expect(page.getByTestId('candidate-row')).toHaveCount(1);
+    // With only one real option on the axis, any non-empty value here can
+    // only be that option ("Vintage") — a <select>'s toHaveText would
+    // include the empty placeholder option's text too, so value is the
+    // reliable thing to assert on.
+    await expect(page.getByTestId('candidate-axis-select')).toHaveValue(/.+/);
+  });
 });
