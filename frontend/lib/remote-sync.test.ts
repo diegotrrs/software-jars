@@ -134,6 +134,35 @@ describe('attachRemoteSync', () => {
     expect(putCalls).toHaveLength(0);
   });
 
+  it('does not let a slow in-flight pull clobber a local write that happens before it resolves (regression: "I type it and it disappears")', async () => {
+    setSyncCode('abc123');
+    const staleRemote = { items: ['stale-from-before-the-edit'] };
+
+    let resolveGet!: (value: { ok: true; json: () => Promise<unknown> }) => void;
+    const getPromise = new Promise((resolve) => {
+      resolveGet = resolve;
+    });
+    const fetchMock = vi.fn().mockImplementation((_url: string, init?: RequestInit) => {
+      if (init?.method === 'PUT') {
+        return Promise.resolve({ ok: true, json: async () => ({ updatedAt: '2026-01-02T00:00:00.000Z' }) });
+      }
+      return getPromise;
+    });
+    vi.stubGlobal('fetch', fetchMock);
+
+    const store = createMockStore({ items: [] });
+    attachRemoteSync('test-jar', store); // fires the initial pull, still in flight
+
+    // The user types something while that first pull is still on the wire.
+    store.writeState({ items: ['just-typed'] });
+
+    // Now the slow pull finally resolves with data fetched before the edit.
+    resolveGet({ ok: true, json: async () => ({ data: staleRemote, updatedAt: '2026-01-01T00:00:00.000Z' }) });
+    await vi.runAllTimersAsync();
+
+    expect(store.getSnapshot()).toEqual({ items: ['just-typed'] });
+  });
+
   it('silently ignores a failed fetch (offline) rather than throwing', async () => {
     setSyncCode('abc123');
     const fetchMock = vi.fn().mockRejectedValue(new Error('network down'));
