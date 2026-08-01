@@ -17,7 +17,9 @@ carried over; only genuinely infrastructural dependencies were.
 ```
 frontend/
 ├── app/
-│   ├── layout.tsx           # Root layout: html/body, ThemeProvider, NextIntlClientProvider
+│   ├── layout.tsx           # Root layout: html/body, ThemeProvider, NextIntlClientProvider,
+│   │                          apple-web-app / theme-color metadata (see Section 8, PWA)
+│   ├── manifest.ts          # Web app manifest (Next's file convention) — name, icons, colors
 │   ├── globals.css          # Tailwind v4 theme tokens + custom dice-roll keyframes
 │   └── (app)/                # Everything that renders inside the Hub shell
 │       ├── layout.tsx        # Wraps children in <AppShell>
@@ -41,6 +43,8 @@ frontend/
 │       └── route.ts          # GET/PUT — Redis-backed cross-device sync (see Section 7)
 ├── components/
 │   ├── app-shell.tsx         # Composition root: TopBar + DesktopSidebar + MobileBottomNav
+│   ├── sync-init.tsx         # Client-only: eagerly loads every sync-enabled jar's store (see Section 7)
+│   ├── service-worker-init.tsx # Client-only: registers public/sw.js once (see Section 8)
 │   ├── desktop-sidebar.tsx   # Left nav (desktop), reads lib/nav.ts
 │   ├── mobile-bottom-nav.tsx # Bottom tab bar (mobile), same lib/nav.ts data
 │   ├── top-bar.tsx           # App name, theme toggle, language switcher
@@ -88,6 +92,11 @@ frontend/
 ├── messages/
 │   ├── en.json                 # All translation strings, namespaced by feature
 │   └── es.json                 # Spanish — every key in en.json must have a matching key here
+├── public/
+│   ├── sw.js                    # Service worker — runtime caching, /api/* always excluded (Section 8)
+│   ├── icon-192.png              # PWA install icon
+│   ├── icon-512.png              # PWA install icon
+│   └── icon-maskable-512.png     # PWA install icon, Android adaptive-icon safe zone
 ├── proxy.ts                    # Next 16's renamed "middleware" — seeds the locale cookie
 ├── e2e/                         # Playwright specs, numbered like kino's
 └── lib/dice.test.ts             # Vitest unit test for dice-rolling logic
@@ -107,8 +116,19 @@ frontend/
    whatever is in the `jars` registry via `JarCard`.
 5. If the jar has its own data and should support cross-device sync, pass
    `{ syncNamespace: '<jar-id>' }` as the third argument to
-   `createLocalStorageStore` (see Section 7) — this is the entire
-   integration, no other files need to change.
+   `createLocalStorageStore` (see Section 7), **and** add a side-effect
+   import of the jar's store module (e.g. `import '@/lib/<jar-id>'`) to
+   `components/sync-init.tsx`. This must go in `sync-init.tsx` specifically,
+   not `app-shell.tsx` — `app-shell.tsx` has no `'use client'` directive
+   (it's a Server Component), so an import placed there only runs during
+   SSR and never reaches the actual browser bundle for pages that don't
+   otherwise need that jar; `sync-init.tsx` is a real client component
+   mounted from `app-shell.tsx` specifically so its imports do end up in the
+   client bundle on every page. Without this, a jar's sync only activates
+   once its own page has been visited in the current tab, so
+   generating/linking a code from Settings wouldn't reach it until then —
+   this was a real, once-shipped bug (data appeared to vanish when linking a
+   fresh device that had never opened the affected jar in that session).
 
 # 4. UI Blocks
 
@@ -261,8 +281,66 @@ data is still namespaced separately server-side so they can't collide.
   `app/api/sync/[jar]/[code]/route.test.ts`) rather than e2e-testing an
   actual two-browser round trip through real Upstash, which needs live
   credentials CI won't have.
+- **Every jar's store must go through `components/sync-init.tsx`'s
+  side-effect imports for its `attachRemoteSync` wiring to actually reach
+  the browser bundle on every page**, not just its own jar's page. This
+  once shipped as a real bug: an import placed in `app-shell.tsx` directly
+  (instead of in `sync-init.tsx`) silently did nothing, because
+  `app-shell.tsx` has no `'use client'` directive — it's a Server
+  Component, so the import only ran during SSR (correctly no-op'd there by
+  the `typeof window` guard) and never made it into the actual client
+  bundle for pages that don't otherwise import that jar's module. The
+  symptom was exactly "I linked the same code on both devices but the
+  data still isn't there" — the fix (`sync-init.tsx` as a genuine client
+  component, mounted from `app-shell.tsx`) was verified against the real
+  Upstash backend with two separate browser contexts standing in for two
+  devices, not just mocked unit tests, specifically because this class of
+  bug (works in an isolated unit test, silently no-ops in the real app)
+  doesn't show up any other way.
 
-# 8. Testing
+# 8. Progressive Web App
+
+Installable (icon on the home screen, opens without browser chrome) and
+able to load its app shell without a network connection for pages already
+visited this session — see `docs/features/pwa.md` for the full plan,
+scope decisions, and why a hand-rolled service worker was used instead of
+a precaching library like `@serwist/next`.
+
+- `app/manifest.ts` — Next's file convention for the web app manifest.
+- `public/icon-192.png`, `public/icon-512.png`,
+  `public/icon-maskable-512.png` — PNG rasters of `components/logo.tsx`'s
+  jar mark on a solid indigo background (`#4F46E5`, matching the theme's
+  primary color), generated via a throwaway Playwright screenshot script
+  (not committed) rather than adding an image-processing dependency for a
+  one-time task. Regenerate the same way if the logo mark ever changes.
+- `app/layout.tsx`'s `metadata.appleWebApp` / `metadata.icons.apple` /
+  `metadata.other['apple-mobile-web-app-capable']` — iOS Safari's "Add to
+  Home Screen" predates and diverges from the manifest spec; Next's
+  `appleWebApp.capable` only emits the modern non-prefixed
+  `mobile-web-app-capable` meta tag, so the legacy `apple-` prefixed one
+  is added explicitly via `metadata.other` for older iOS versions that
+  only check that one.
+- `public/sw.js` — hand-written service worker, **runtime caching only,
+  not precaching**: caches a response the first time it's actually
+  requested, serves from cache on repeat visits or when offline. Requests
+  under `/api/` (in particular `/api/sync/*`) are explicitly never
+  intercepted — always network-only, unchanged from before the service
+  worker existed. This was verified against the real Upstash backend
+  (generate/link a code, confirm data still moves between two browser
+  contexts) with the service worker active, since a naively-configured
+  service worker caching API responses would silently break sync by
+  serving stale data instead of hitting Redis.
+- `components/service-worker-init.tsx` — registers `public/sw.js` once,
+  mounted from `app-shell.tsx` alongside `sync-init.tsx`.
+- Known limitation, by design: only pages visited at least once this
+  session work offline. An unvisited page correctly fails to load
+  offline — guaranteeing first-visit-offline would need a build-time
+  precache manifest (every hashed static asset filename for the current
+  deploy), which is real added complexity/a new dependency, not something
+  hand-rolled cheaply. Revisit only if that specific guarantee turns out
+  to matter in practice.
+
+# 9. Testing
 
 - Unit tests: Vitest, colocated as `*.test.ts` next to the code. `lib/dice.ts`
   (pure functions), `lib/local-storage-store.ts` (the shared store factory —
@@ -288,7 +366,7 @@ data is still namespaced separately server-side so they can't collide.
 - `npm run check` runs both (`vitest run && playwright test`), matching
   kino's convention.
 
-# 9. Coding Standards
+# 10. Coding Standards
 
 No dedicated coding-standards doc exists yet for this project (kino has
 one at `frontend/docs/coding_standards.md` if a reference is needed).
