@@ -1,8 +1,9 @@
 'use client';
 import { EditableText } from '@/components/jars/idea-matrix/editable-text';
 import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import type { Axis } from '@/lib/idea-matrix';
-import { Plus, X } from 'lucide-react';
+import { Heart, Plus, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
@@ -14,6 +15,7 @@ type AxisEditorProps = {
   onAddOption: (label: string) => void;
   onRenameOption: (optionId: string, label: string) => void;
   onDeleteOption: (optionId: string) => void;
+  onToggleOptionFavorite: (optionId: string) => void;
 };
 
 export const AxisEditor = ({
@@ -24,6 +26,7 @@ export const AxisEditor = ({
   onAddOption,
   onRenameOption,
   onDeleteOption,
+  onToggleOptionFavorite,
 }: AxisEditorProps) => {
   const t = useTranslations('ideaMatrix');
   const [draft, setDraft] = useState('');
@@ -65,6 +68,15 @@ export const AxisEditor = ({
               inputClassName='w-24 px-1 py-0.5 text-xs'
               testId='axis-option-label'
             />
+            <button
+              type='button'
+              onClick={() => onToggleOptionFavorite(option.id)}
+              aria-label={option.favorite ? t('unfavoriteOption') : t('favoriteOption')}
+              aria-pressed={option.favorite}
+              data-testid='axis-option-favorite'
+            >
+              <Heart className={cn('h-3 w-3', option.favorite && 'fill-rose-500 text-rose-500')} />
+            </button>
             <button
               type='button'
               onClick={() => onDeleteOption(option.id)}

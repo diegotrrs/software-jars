@@ -115,19 +115,31 @@ const push = async () => {
 ```
 
 Pull — on attach, on focus, and whenever the code changes; only applies
-the remote copy if it's actually newer:
+the remote copy if it's actually newer, and skips entirely if a local
+write raced it (see `docs/bugs/sync-pull-race-overwrite.md` — the initial
+pull used to unconditionally win against a write that landed during its
+round trip):
 
 ```ts
-// lib/remote-sync.ts:46-63
+// lib/remote-sync.ts:53-94
 const pull = async () => {
   const code = getSyncCode();
   if (!code) return;
+  if (pushTimer !== null || pushInFlight) return; // a local edit is pending/in flight
+
+  const versionAtStart = writeVersion;
   try {
     const res = await fetch(`/api/sync/${jarNamespace}/${code}`);
     if (!res.ok) return;
     const body = (await res.json()) as SyncEnvelope<T>;
-    if (body.data === null || body.updatedAt === null) return;
+
+    if (body.data === null || body.updatedAt === null) {
+      push(); // seed the server if nothing's stored under this code yet
+      return;
+    }
+
     if (lastSyncedAt !== null && body.updatedAt <= lastSyncedAt) return;
+    if (writeVersion !== versionAtStart) return; // a write raced this pull — discard it
 
     applyingRemote = true;   // guards against pull -> write -> push -> pull ping-pong
     store.writeState(body.data);
@@ -139,15 +151,19 @@ const pull = async () => {
 };
 ```
 
-Wiring — debounce timer on every store write, plus focus/code-change
-triggers:
+Wiring — debounce timer on every store write (bumping `writeVersion`),
+plus focus/code-change triggers:
 
 ```ts
-// lib/remote-sync.ts:65-77
+// lib/remote-sync.ts:96-112
 store.subscribe(() => {
   if (applyingRemote) return;
+  writeVersion++;
   if (pushTimer) clearTimeout(pushTimer);
-  pushTimer = setTimeout(push, PUSH_DEBOUNCE_MS); // 800ms
+  pushTimer = setTimeout(() => {
+    pushTimer = null;
+    push();
+  }, PUSH_DEBOUNCE_MS); // 800ms
 });
 
 subscribeSyncCode(pull);

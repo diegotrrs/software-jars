@@ -1,10 +1,12 @@
 'use client';
 import { AxisEditor } from '@/components/jars/idea-matrix/axis-editor';
 import { CandidatesTable } from '@/components/jars/idea-matrix/candidates-table';
+import { CategorySearch } from '@/components/jars/idea-matrix/category-search';
 import { EditableText } from '@/components/jars/idea-matrix/editable-text';
 import { Button } from '@/components/ui/button';
 import {
   addAxis,
+  addAxisFromCategory,
   addAxisOption,
   addCandidate,
   addRandomCandidate,
@@ -19,6 +21,7 @@ import {
   setCandidateNotes,
   setCandidateScore,
   setCandidateSelection,
+  toggleAxisOptionFavorite,
 } from '@/lib/idea-matrix';
 import { useIdeaMatrixProjects } from '@/lib/use-idea-matrix';
 import { ArrowLeft, Plus, Shuffle } from 'lucide-react';
@@ -81,6 +84,8 @@ export const ProjectView = ({ projectId }: ProjectViewProps) => {
         </Button>
       </div>
 
+      <CategorySearch onAddCategory={(category) => addAxisFromCategory(project.id, category)} />
+
       <section className='flex flex-col gap-2'>
         <h2 className='text-sm font-semibold text-muted-foreground'>{t('axesTitle')}</h2>
         <div className='flex flex-wrap items-start gap-3' data-testid='axes-list'>
@@ -94,6 +99,7 @@ export const ProjectView = ({ projectId }: ProjectViewProps) => {
               onAddOption={(label) => addAxisOption(project.id, axis.id, label)}
               onRenameOption={(optionId, label) => renameAxisOption(project.id, axis.id, optionId, label)}
               onDeleteOption={(optionId) => deleteAxisOption(project.id, axis.id, optionId)}
+              onToggleOptionFavorite={(optionId) => toggleAxisOptionFavorite(project.id, axis.id, optionId)}
             />
           ))}
           <Button

@@ -1,0 +1,226 @@
+[
+  {
+    "id": "sports",
+    "name": "Deportes",
+    "options": [
+      { "id": "tennis", "label": "Tenis" },
+      { "id": "football", "label": "Fútbol" },
+      { "id": "basketball", "label": "Baloncesto" },
+      { "id": "swimming", "label": "Natación" },
+      { "id": "cycling", "label": "Ciclismo" },
+      { "id": "padel", "label": "Pádel" },
+      { "id": "golf", "label": "Golf" },
+      { "id": "volleyball", "label": "Voleibol" },
+      { "id": "baseball", "label": "Béisbol" },
+      { "id": "rugby", "label": "Rugby" },
+      { "id": "cricket", "label": "Críquet" },
+      { "id": "running", "label": "Running" },
+      { "id": "american-football", "label": "Fútbol Americano" },
+      { "id": "table-tennis", "label": "Tenis de Mesa" },
+      { "id": "badminton", "label": "Bádminton" }
+    ]
+  },
+  {
+    "id": "colors",
+    "name": "Colores",
+    "options": [
+      { "id": "red", "label": "Rojo" },
+      { "id": "blue", "label": "Azul" },
+      { "id": "green", "label": "Verde" },
+      { "id": "yellow", "label": "Amarillo" },
+      { "id": "purple", "label": "Morado" }
+    ]
+  },
+  {
+    "id": "seasons",
+    "name": "Estaciones",
+    "options": [
+      { "id": "spring", "label": "Primavera" },
+      { "id": "summer", "label": "Verano" },
+      { "id": "autumn", "label": "Otoño" },
+      { "id": "winter", "label": "Invierno" }
+    ]
+  },
+  {
+    "id": "animals",
+    "name": "Animales",
+    "options": [
+      { "id": "dog", "label": "Perro" },
+      { "id": "cat", "label": "Gato" },
+      { "id": "elephant", "label": "Elefante" },
+      { "id": "dolphin", "label": "Delfín" },
+      { "id": "eagle", "label": "Águila" }
+    ]
+  },
+  {
+    "id": "weather",
+    "name": "Clima",
+    "options": [
+      { "id": "sunny", "label": "Soleado" },
+      { "id": "rainy", "label": "Lluvioso" },
+      { "id": "cloudy", "label": "Nublado" },
+      { "id": "snowy", "label": "Nevado" },
+      { "id": "windy", "label": "Ventoso" }
+    ]
+  },
+  {
+    "id": "music-genres",
+    "name": "Géneros Musicales",
+    "options": [
+      { "id": "rock", "label": "Rock" },
+      { "id": "jazz", "label": "Jazz" },
+      { "id": "classical", "label": "Clásica" },
+      { "id": "hip-hop", "label": "Hip-Hop" },
+      { "id": "electronic", "label": "Electrónica" }
+    ]
+  },
+  {
+    "id": "cuisines",
+    "name": "Cocinas",
+    "options": [
+      { "id": "italian", "label": "Italiana" },
+      { "id": "japanese", "label": "Japonesa" },
+      { "id": "mexican", "label": "Mexicana" },
+      { "id": "indian", "label": "India" },
+      { "id": "french", "label": "Francesa" }
+    ]
+  },
+  {
+    "id": "time-of-day",
+    "name": "Momento del Día",
+    "options": [
+      { "id": "morning", "label": "Mañana" },
+      { "id": "afternoon", "label": "Tarde" },
+      { "id": "evening", "label": "Atardecer" },
+      { "id": "night", "label": "Noche" }
+    ]
+  },
+  {
+    "id": "occasion",
+    "name": "Ocasión",
+    "options": [
+      { "id": "birthday", "label": "Cumpleaños" },
+      { "id": "anniversary", "label": "Aniversario" },
+      { "id": "wedding", "label": "Boda" },
+      { "id": "graduation", "label": "Graduación" },
+      { "id": "christmas", "label": "Navidad" },
+      { "id": "baby-shower", "label": "Baby Shower" },
+      { "id": "retirement", "label": "Jubilación" },
+      { "id": "housewarming", "label": "Inauguración de casa" },
+      { "id": "bachelor-party", "label": "Despedida de soltero" },
+      { "id": "family-reunion", "label": "Reunión familiar" }
+    ]
+  },
+  {
+    "id": "mood",
+    "name": "Estado de Ánimo",
+    "options": [
+      { "id": "happy", "label": "Feliz" },
+      { "id": "grumpy", "label": "Gruñón" },
+      { "id": "nostalgic", "label": "Nostálgico" },
+      { "id": "anxious", "label": "Ansioso" },
+      { "id": "excited", "label": "Emocionado" },
+      { "id": "relaxed", "label": "Relajado" },
+      { "id": "melancholic", "label": "Melancólico" },
+      { "id": "confident", "label": "Seguro" },
+      { "id": "playful", "label": "Juguetón" },
+      { "id": "romantic", "label": "Romántico" }
+    ]
+  },
+  {
+    "id": "film-genre",
+    "name": "Género de Película",
+    "options": [
+      { "id": "comedy", "label": "Comedia" },
+      { "id": "horror", "label": "Terror" },
+      { "id": "romance", "label": "Romance" },
+      { "id": "action", "label": "Acción" },
+      { "id": "drama", "label": "Drama" },
+      { "id": "thriller", "label": "Suspenso" },
+      { "id": "sci-fi", "label": "Ciencia Ficción" },
+      { "id": "fantasy", "label": "Fantasía" },
+      { "id": "documentary", "label": "Documental" },
+      { "id": "animation", "label": "Animación" }
+    ]
+  },
+  {
+    "id": "place",
+    "name": "Lugar",
+    "options": [
+      { "id": "office", "label": "Oficina" },
+      { "id": "beach", "label": "Playa" },
+      { "id": "forest", "label": "Bosque" },
+      { "id": "city", "label": "Ciudad" },
+      { "id": "mountain", "label": "Montaña" },
+      { "id": "cafe", "label": "Cafetería" },
+      { "id": "airport", "label": "Aeropuerto" },
+      { "id": "school", "label": "Escuela" },
+      { "id": "gym", "label": "Gimnasio" },
+      { "id": "home", "label": "Casa" }
+    ]
+  },
+  {
+    "id": "sub-culture",
+    "name": "Subcultura",
+    "options": [
+      { "id": "goth", "label": "Gótico" },
+      { "id": "punk", "label": "Punk" },
+      { "id": "hipster", "label": "Hipster" },
+      { "id": "skater", "label": "Skater" },
+      { "id": "gamer", "label": "Gamer" },
+      { "id": "cottagecore", "label": "Cottagecore" },
+      { "id": "streetwear", "label": "Streetwear" },
+      { "id": "k-pop", "label": "K-Pop" },
+      { "id": "dog-moms", "label": "Mamás de Perros" },
+      { "id": "dark-academia", "label": "Dark Academia" }
+    ]
+  },
+  {
+    "id": "age-target",
+    "name": "Público Objetivo",
+    "options": [
+      { "id": "toddlers", "label": "Niños pequeños" },
+      { "id": "kids", "label": "Niños" },
+      { "id": "tweens", "label": "Preadolescentes" },
+      { "id": "teens", "label": "Adolescentes" },
+      { "id": "young-adults", "label": "Adultos jóvenes" },
+      { "id": "adults", "label": "Adultos" },
+      { "id": "seniors", "label": "Adultos mayores" },
+      { "id": "gen-z", "label": "Generación Z" },
+      { "id": "millennials", "label": "Millennials" },
+      { "id": "families", "label": "Familias" }
+    ]
+  },
+  {
+    "id": "time-period",
+    "name": "Época",
+    "options": [
+      { "id": "futuristic", "label": "Futurista" },
+      { "id": "eighties", "label": "Años 80" },
+      { "id": "nineties", "label": "Años 90" },
+      { "id": "medieval", "label": "Medieval" },
+      { "id": "victorian", "label": "Época Victoriana" },
+      { "id": "ancient-egypt", "label": "Antiguo Egipto" },
+      { "id": "prehistoric", "label": "Prehistórico" },
+      { "id": "renaissance", "label": "Renacimiento" },
+      { "id": "y2k", "label": "Y2K" },
+      { "id": "retro", "label": "Retro" }
+    ]
+  },
+  {
+    "id": "things",
+    "name": "Objetos",
+    "options": [
+      { "id": "shoe", "label": "Zapato" },
+      { "id": "plant", "label": "Planta" },
+      { "id": "lamp", "label": "Lámpara" },
+      { "id": "mug", "label": "Taza" },
+      { "id": "backpack", "label": "Mochila" },
+      { "id": "watch", "label": "Reloj" },
+      { "id": "candle", "label": "Vela" },
+      { "id": "chair", "label": "Silla" },
+      { "id": "notebook", "label": "Cuaderno" },
+      { "id": "umbrella", "label": "Paraguas" }
+    ]
+  }
+]

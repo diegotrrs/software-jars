@@ -1,10 +1,12 @@
 import { createLocalStorageStore } from '@/lib/local-storage-store';
+import type { VariableCategory } from '@/lib/variable-categories';
 
 const STORAGE_KEY = 'software-jars:idea-matrix';
 
 export type AxisOption = {
   id: string;
   label: string;
+  favorite: boolean;
 };
 
 export type Axis = {
@@ -111,6 +113,21 @@ export const renameAxis = (projectId: string, axisId: string, name: string): voi
   updateAxis(projectId, axisId, (axis) => ({ ...axis, name }));
 };
 
+// Adds a whole pre-populated category as a brand-new axis (fresh ids
+// throughout — the category's own ids are only used to keep its en/es
+// translations aligned, not carried into the project's data). Behaves
+// exactly like a manually-built axis afterward; can be added more than
+// once, nothing tracks which categories were already used.
+export const addAxisFromCategory = (projectId: string, category: VariableCategory): Axis => {
+  const axis: Axis = {
+    id: generateId(),
+    name: category.name,
+    options: category.options.map((option) => ({ id: generateId(), label: option.label, favorite: false })),
+  };
+  updateProject(projectId, (project) => ({ ...project, axes: [...project.axes, axis] }));
+  return axis;
+};
+
 // Also strips this axis's key from every candidate's selections, since a
 // selection referencing a deleted axis is meaningless.
 export const deleteAxis = (projectId: string, axisId: string): void => {
@@ -127,7 +144,7 @@ export const deleteAxis = (projectId: string, axisId: string): void => {
 };
 
 export const addAxisOption = (projectId: string, axisId: string, label: string): AxisOption => {
-  const option: AxisOption = { id: generateId(), label };
+  const option: AxisOption = { id: generateId(), label, favorite: false };
   updateAxis(projectId, axisId, (axis) => ({ ...axis, options: [...axis.options, option] }));
   return option;
 };
@@ -136,6 +153,15 @@ export const renameAxisOption = (projectId: string, axisId: string, optionId: st
   updateAxis(projectId, axisId, (axis) => ({
     ...axis,
     options: axis.options.map((option) => (option.id === optionId ? { ...option, label } : option)),
+  }));
+};
+
+export const toggleAxisOptionFavorite = (projectId: string, axisId: string, optionId: string): void => {
+  updateAxis(projectId, axisId, (axis) => ({
+    ...axis,
+    options: axis.options.map((option) =>
+      option.id === optionId ? { ...option, favorite: !option.favorite } : option
+    ),
   }));
 };
 

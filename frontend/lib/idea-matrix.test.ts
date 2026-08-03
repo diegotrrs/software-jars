@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import {
   addAxis,
+  addAxisFromCategory,
   addAxisOption,
   addCandidate,
   addRandomCandidate,
@@ -19,6 +20,7 @@ import {
   setCandidateNotes,
   setCandidateScore,
   setCandidateSelection,
+  toggleAxisOptionFavorite,
 } from './idea-matrix';
 
 beforeEach(() => {
@@ -79,6 +81,38 @@ describe('axes', () => {
     expect(getProject(project.id)?.axes).toEqual([]);
     expect(getProject(project.id)?.candidates[0].selections).toEqual({});
   });
+
+  it('adds a whole category as a new axis, with fresh ids and unfavorited options', () => {
+    const project = createProject('Project');
+    const category = {
+      id: 'sports',
+      name: 'Sports',
+      options: [
+        { id: 'tennis', label: 'Tennis' },
+        { id: 'football', label: 'Football' },
+      ],
+    };
+
+    const axis = addAxisFromCategory(project.id, category);
+
+    expect(axis.name).toBe('Sports');
+    expect(axis.options.map((o) => o.label)).toEqual(['Tennis', 'Football']);
+    expect(axis.options.every((o) => o.favorite === false)).toBe(true);
+    expect(axis.id).not.toBe(category.id);
+    expect(axis.options[0].id).not.toBe(category.options[0].id);
+    expect(getProject(project.id)?.axes).toEqual([axis]);
+  });
+
+  it('adding the same category twice creates two independent axes', () => {
+    const project = createProject('Project');
+    const category = { id: 'colors', name: 'Colors', options: [{ id: 'red', label: 'Red' }] };
+
+    const first = addAxisFromCategory(project.id, category);
+    const second = addAxisFromCategory(project.id, category);
+
+    expect(first.id).not.toBe(second.id);
+    expect(getProject(project.id)?.axes).toEqual([first, second]);
+  });
 });
 
 describe('axis options', () => {
@@ -108,6 +142,38 @@ describe('axis options', () => {
 
     expect(getProject(project.id)?.axes[0].options).toEqual([]);
     expect(getProject(project.id)?.candidates[0].selections).toEqual({});
+  });
+
+  it('adds an option unfavorited by default', () => {
+    const project = createProject('Project');
+    const axis = addAxis(project.id, 'Niche');
+    const option = addAxisOption(project.id, axis.id, 'Vintage');
+    expect(option.favorite).toBe(false);
+  });
+
+  it('toggles an option favorite on and off', () => {
+    const project = createProject('Project');
+    const axis = addAxis(project.id, 'Niche');
+    const option = addAxisOption(project.id, axis.id, 'Vintage');
+
+    toggleAxisOptionFavorite(project.id, axis.id, option.id);
+    expect(getProject(project.id)?.axes[0].options[0].favorite).toBe(true);
+
+    toggleAxisOptionFavorite(project.id, axis.id, option.id);
+    expect(getProject(project.id)?.axes[0].options[0].favorite).toBe(false);
+  });
+
+  it('toggling one option favorite does not affect other options', () => {
+    const project = createProject('Project');
+    const axis = addAxis(project.id, 'Niche');
+    const vintage = addAxisOption(project.id, axis.id, 'Vintage');
+    const nerd = addAxisOption(project.id, axis.id, 'Nerd');
+
+    toggleAxisOptionFavorite(project.id, axis.id, vintage.id);
+
+    const options = getProject(project.id)?.axes[0].options ?? [];
+    expect(options.find((o) => o.id === vintage.id)?.favorite).toBe(true);
+    expect(options.find((o) => o.id === nerd.id)?.favorite).toBe(false);
   });
 });
 

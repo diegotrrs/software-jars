@@ -1,0 +1,250 @@
+[
+  {
+    "id": "sports",
+    "name": "Sports",
+    "options": [
+      { "id": "tennis", "label": "Tennis" },
+      { "id": "football", "label": "Football" },
+      { "id": "basketball", "label": "Basketball" },
+      { "id": "swimming", "label": "Swimming" },
+      { "id": "cycling", "label": "Cycling" },
+      { "id": "padel", "label": "Padel" },
+      { "id": "golf", "label": "Golf" },
+      { "id": "volleyball", "label": "Volleyball" },
+      { "id": "baseball", "label": "Baseball" },
+      { "id": "rugby", "label": "Rugby" },
+      { "id": "cricket", "label": "Cricket" },
+      { "id": "running", "label": "Running" },
+      { "id": "american-football", "label": "American Football" },
+      { "id": "table-tennis", "label": "Table Tennis" },
+      { "id": "badminton", "label": "Badminton" }
+    ]
+  },
+  {
+    "id": "colors",
+    "name": "Colors",
+    "options": [
+      { "id": "red", "label": "Red" },
+      { "id": "blue", "label": "Blue" },
+      { "id": "green", "label": "Green" },
+      { "id": "yellow", "label": "Yellow" },
+      { "id": "purple", "label": "Purple" }
+    ]
+  },
+  {
+    "id": "seasons",
+    "name": "Seasons",
+    "options": [
+      { "id": "spring", "label": "Spring" },
+      { "id": "summer", "label": "Summer" },
+      { "id": "autumn", "label": "Autumn" },
+      { "id": "winter", "label": "Winter" }
+    ]
+  },
+  {
+    "id": "animals",
+    "name": "Animals",
+    "options": [
+      { "id": "dog", "label": "Dog" },
+      { "id": "cat", "label": "Cat" },
+      { "id": "elephant", "label": "Elephant" },
+      { "id": "dolphin", "label": "Dolphin" },
+      { "id": "eagle", "label": "Eagle" }
+    ]
+  },
+  {
+    "id": "weather",
+    "name": "Weather",
+    "options": [
+      { "id": "sunny", "label": "Sunny" },
+      { "id": "rainy", "label": "Rainy" },
+      { "id": "cloudy", "label": "Cloudy" },
+      { "id": "snowy", "label": "Snowy" },
+      { "id": "windy", "label": "Windy" }
+    ]
+  },
+  {
+    "id": "music-genres",
+    "name": "Music Genres",
+    "options": [
+      { "id": "rock", "label": "Rock" },
+      { "id": "jazz", "label": "Jazz" },
+      { "id": "classical", "label": "Classical" },
+      { "id": "hip-hop", "label": "Hip-Hop" },
+      { "id": "electronic", "label": "Electronic" }
+    ]
+  },
+  {
+    "id": "cuisines",
+    "name": "Cuisines",
+    "options": [
+      { "id": "italian", "label": "Italian" },
+      { "id": "japanese", "label": "Japanese" },
+      { "id": "mexican", "label": "Mexican" },
+      { "id": "indian", "label": "Indian" },
+      { "id": "french", "label": "French" }
+    ]
+  },
+  {
+    "id": "time-of-day",
+    "name": "Time of Day",
+    "options": [
+      { "id": "morning", "label": "Morning" },
+      { "id": "afternoon", "label": "Afternoon" },
+      { "id": "evening", "label": "Evening" },
+      { "id": "night", "label": "Night" }
+    ]
+  },
+  {
+    "id": "occasion",
+    "name": "Occasion",
+    "options": [
+      { "id": "birthday", "label": "Birthday" },
+      { "id": "anniversary", "label": "Anniversary" },
+      { "id": "wedding", "label": "Wedding" },
+      { "id": "graduation", "label": "Graduation" },
+      { "id": "christmas", "label": "Christmas" },
+      { "id": "baby-shower", "label": "Baby Shower" },
+      { "id": "retirement", "label": "Retirement" },
+      { "id": "housewarming", "label": "Housewarming" },
+      { "id": "bachelor-party", "label": "Bachelor Party" },
+      { "id": "family-reunion", "label": "Family Reunion" }
+    ]
+  },
+  {
+    "id": "mood",
+    "name": "Mood",
+    "options": [
+      { "id": "happy", "label": "Happy" },
+      { "id": "grumpy", "label": "Grumpy" },
+      { "id": "nostalgic", "label": "Nostalgic" },
+      { "id": "anxious", "label": "Anxious" },
+      { "id": "excited", "label": "Excited" },
+      { "id": "relaxed", "label": "Relaxed" },
+      { "id": "melancholic", "label": "Melancholic" },
+      { "id": "confident", "label": "Confident" },
+      { "id": "playful", "label": "Playful" },
+      { "id": "romantic", "label": "Romantic" }
+    ]
+  },
+  {
+    "id": "film-genre",
+    "name": "Film Genre",
+    "options": [
+      { "id": "comedy", "label": "Comedy" },
+      { "id": "horror", "label": "Horror" },
+      { "id": "romance", "label": "Romance" },
+      { "id": "action", "label": "Action" },
+      { "id": "drama", "label": "Drama" },
+      { "id": "thriller", "label": "Thriller" },
+      { "id": "sci-fi", "label": "Sci-Fi" },
+      { "id": "fantasy", "label": "Fantasy" },
+      { "id": "documentary", "label": "Documentary" },
+      { "id": "animation", "label": "Animation" }
+    ]
+  },
+  {
+    "id": "place",
+    "name": "Place",
+    "options": [
+      { "id": "office", "label": "Office" },
+      { "id": "beach", "label": "Beach" },
+      { "id": "forest", "label": "Forest" },
+      { "id": "city", "label": "City" },
+      { "id": "mountain", "label": "Mountain" },
+      { "id": "cafe", "label": "Café" },
+      { "id": "airport", "label": "Airport" },
+      { "id": "school", "label": "School" },
+      { "id": "gym", "label": "Gym" },
+      { "id": "home", "label": "Home" }
+    ]
+  },
+  {
+    "id": "sub-culture",
+    "name": "Subculture",
+    "options": [
+      { "id": "goth", "label": "Goth" },
+      { "id": "punk", "label": "Punk" },
+      { "id": "hipster", "label": "Hipster" },
+      { "id": "skater", "label": "Skater" },
+      { "id": "gamer", "label": "Gamer" },
+      { "id": "cottagecore", "label": "Cottagecore" },
+      { "id": "streetwear", "label": "Streetwear" },
+      { "id": "k-pop", "label": "K-Pop" },
+      { "id": "dog-moms", "label": "Dog Moms" },
+      { "id": "dark-academia", "label": "Dark Academia" }
+    ]
+  },
+  {
+    "id": "age-target",
+    "name": "Age Target",
+    "options": [
+      { "id": "toddlers", "label": "Toddlers" },
+      { "id": "kids", "label": "Kids" },
+      { "id": "tweens", "label": "Tweens" },
+      { "id": "teens", "label": "Teens" },
+      { "id": "young-adults", "label": "Young Adults" },
+      { "id": "adults", "label": "Adults" },
+      { "id": "seniors", "label": "Seniors" },
+      { "id": "gen-z", "label": "Gen Z" },
+      { "id": "millennials", "label": "Millennials" },
+      { "id": "families", "label": "Families" }
+    ]
+  },
+  {
+    "id": "time-period",
+    "name": "Time Period",
+    "options": [
+      { "id": "futuristic", "label": "Futuristic" },
+      { "id": "seventies", "label": "1970s" },
+      { "id": "eighties", "label": "1980s" },
+      { "id": "nineties", "label": "1990s" },
+      { "id": "medieval", "label": "Medieval" },
+      { "id": "victorian", "label": "Victorian Era" },
+      { "id": "ancient-egypt", "label": "Ancient Egypt" },
+      { "id": "prehistoric", "label": "Prehistoric" },
+      { "id": "renaissance", "label": "Renaissance" },
+      { "id": "y2k", "label": "Y2K" },
+      { "id": "retro", "label": "Retro" }
+    ]
+  },
+  {
+    "id": "things",
+    "name": "Things",
+    "options": [
+      { "id": "shoe", "label": "Shoe" },
+      { "id": "plant", "label": "Plant" },
+      { "id": "lamp", "label": "Lamp" },
+      { "id": "mug", "label": "Mug" },
+      { "id": "backpack", "label": "Backpack" },
+      { "id": "watch", "label": "Watch" },
+      { "id": "candle", "label": "Candle" },
+      { "id": "chair", "label": "Chair" },
+      { "id": "notebook", "label": "Notebook" },
+      { "id": "umbrella", "label": "Umbrella" }
+    ]
+  },
+  {
+    "id": "art-style", 
+    "name": "Art Style",
+    "options": [
+      { "id": "watercolour", "label": "Watercolour" },
+      { "id": "gouache", "label": "Gouache" },
+      { "id": "impasto", "label": "Impasto" },
+      { "id": "acrylic", "label": "Acrylic" },
+      { "id": "ink-wash", "label": "Ink Wash" },
+      { "id": "woodcut", "label": "Vintage Woodcut" },
+      { "id": "linocut", "label": "Linocut" },
+      { "id": "comic-books", "label": "Comic books" },
+      { "id": "childrens-book-illustration", "label": "Children's Book Illustration" },
+      { "id": "flat-vector-illustration", "label": "Flat Vector Illustration" },
+      { "id": "line-art-illustration", "label": "Line Art Illustration" },
+      { "id": "doodle-illustration", "label": "Doodle Illustration" },
+      { "id": "kawaii", "label": "Kawaii" },
+      { "id": "retro-cartoon", "label": "Retro Cartoon" },
+      { "id": "pop-art", "label": "Pop Art" },
+      { "id": "vintage-postcard", "label": "Vintage Postcard" },
+      { "id": "risograph", "label": "Risograph" }
+    ]
+  }
+]
