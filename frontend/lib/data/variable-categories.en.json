@@ -108,7 +108,11 @@
       { "id": "retirement", "label": "Retirement" },
       { "id": "housewarming", "label": "Housewarming" },
       { "id": "bachelor-party", "label": "Bachelor Party" },
-      { "id": "family-reunion", "label": "Family Reunion" }
+      { "id": "family-reunion", "label": "Family Reunion" },
+      { "id": "death", "label": "Death" },
+      { "id": "new-job", "label": "New Job" },
+      { "id": "new-baby", "label": "New Baby" },
+      { "id": "first-date", "label": "First Date" }
     ]
   },
   {
@@ -124,7 +128,12 @@
       { "id": "melancholic", "label": "Melancholic" },
       { "id": "confident", "label": "Confident" },
       { "id": "playful", "label": "Playful" },
-      { "id": "romantic", "label": "Romantic" }
+      { "id": "romantic", "label": "Romantic" },
+      { "id": "cold", "label": "Cold" },
+      { "id": "hot", "label": "Hot" },
+      { "id": "sexy", "label": "Sexy" },
+      { "id": "loved", "label": "Loved" },
+      { "id": "cute", "label": "Cute" }
     ]
   },
   {
@@ -156,7 +165,11 @@
       { "id": "airport", "label": "Airport" },
       { "id": "school", "label": "School" },
       { "id": "gym", "label": "Gym" },
-      { "id": "home", "label": "Home" }
+      { "id": "home", "label": "Home" },
+      { "id": "church", "label": "Church" },
+      { "id": "unknown-planet", "label": "Unknown Planet" },
+      { "id": "saturn", "label": "Saturn" },
+      { "id": "mars", "label": "Mars" }
     ]
   },
   {
@@ -172,7 +185,12 @@
       { "id": "streetwear", "label": "Streetwear" },
       { "id": "k-pop", "label": "K-Pop" },
       { "id": "dog-moms", "label": "Dog Moms" },
-      { "id": "dark-academia", "label": "Dark Academia" }
+      { "id": "dark-academia", "label": "Dark Academia" },
+      { "id": "queer", "label": "Queer" },
+      { "id": "women", "label": "Women" },
+      { "id": "mums", "label": "Mums" },
+      { "id": "gaymers", "label": "Gaymers" },
+      { "id": "girl-power", "label": "Girl Power" }
     ]
   },
   {
@@ -188,7 +206,10 @@
       { "id": "seniors", "label": "Seniors" },
       { "id": "gen-z", "label": "Gen Z" },
       { "id": "millennials", "label": "Millennials" },
-      { "id": "families", "label": "Families" }
+      { "id": "families", "label": "Families" },
+      { "id": "babies", "label": "Babies" },
+      { "id": "elderly", "label": "Elderly" },
+      { "id": "couples", "label": "Couples" }
     ]
   },
   {
@@ -221,7 +242,9 @@
       { "id": "candle", "label": "Candle" },
       { "id": "chair", "label": "Chair" },
       { "id": "notebook", "label": "Notebook" },
-      { "id": "umbrella", "label": "Umbrella" }
+      { "id": "umbrella", "label": "Umbrella" },
+      { "id": "cards", "label": "Cards" },
+      { "id": "carpet", "label": "Carpet" }
     ]
   },
   {
@@ -245,6 +268,34 @@
       { "id": "pop-art", "label": "Pop Art" },
       { "id": "vintage-postcard", "label": "Vintage Postcard" },
       { "id": "risograph", "label": "Risograph" }
+    ]
+  },
+  {
+    "id": "products",
+    "name": "Products",
+    "options": [
+      { "id": "posters", "label": "Posters" },
+      { "id": "piggy-bank", "label": "Piggy Bank" },
+      { "id": "coasters", "label": "Coasters" },
+      { "id": "ties", "label": "Ties" },
+      { "id": "shoelaces", "label": "Shoelaces" },
+      { "id": "nail-clippers", "label": "Nail Clippers" },
+      { "id": "bookmarkers", "label": "Bookmarkers" },
+      { "id": "deck-of-cards", "label": "Deck of Cards" },
+      { "id": "bibs", "label": "Bibs" },
+      { "id": "handbags", "label": "Handbags" },
+      { "id": "postcards", "label": "Postcards" },
+      { "id": "digital-assets", "label": "Digital Assets" }
+    ]
+  },
+  {
+    "id": "living-things",
+    "name": "Living Things",
+    "options": [
+      { "id": "cat", "label": "Cat" },
+      { "id": "plants", "label": "Plants" },
+      { "id": "dinosaurs", "label": "Dinosaurs" },
+      { "id": "aliens", "label": "Aliens" }
     ]
   }
 ]

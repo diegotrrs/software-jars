@@ -188,7 +188,7 @@ test.describe('@3. idea matrix', () => {
     await page.getByTestId('new-project').click();
     await page.waitForURL(/\/jars\/idea-matrix\/.+/);
 
-    await expect(page.getByTestId('category-chip')).toHaveCount(17);
+    await expect(page.getByTestId('category-chip')).toHaveCount(19);
 
     await page.getByTestId('category-search-input').fill('tennis');
     await expect(page.getByTestId('category-chip')).toHaveCount(1);

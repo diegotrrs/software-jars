@@ -108,7 +108,11 @@
       { "id": "retirement", "label": "Jubilación" },
       { "id": "housewarming", "label": "Inauguración de casa" },
       { "id": "bachelor-party", "label": "Despedida de soltero" },
-      { "id": "family-reunion", "label": "Reunión familiar" }
+      { "id": "family-reunion", "label": "Reunión familiar" },
+      { "id": "death", "label": "Fallecimiento" },
+      { "id": "new-job", "label": "Nuevo Trabajo" },
+      { "id": "new-baby", "label": "Nuevo Bebé" },
+      { "id": "first-date", "label": "Primera Cita" }
     ]
   },
   {
@@ -124,7 +128,12 @@
       { "id": "melancholic", "label": "Melancólico" },
       { "id": "confident", "label": "Seguro" },
       { "id": "playful", "label": "Juguetón" },
-      { "id": "romantic", "label": "Romántico" }
+      { "id": "romantic", "label": "Romántico" },
+      { "id": "cold", "label": "Frío" },
+      { "id": "hot", "label": "Caliente" },
+      { "id": "sexy", "label": "Sexy" },
+      { "id": "loved", "label": "Amado" },
+      { "id": "cute", "label": "Tierno" }
     ]
   },
   {
@@ -156,7 +165,11 @@
       { "id": "airport", "label": "Aeropuerto" },
       { "id": "school", "label": "Escuela" },
       { "id": "gym", "label": "Gimnasio" },
-      { "id": "home", "label": "Casa" }
+      { "id": "home", "label": "Casa" },
+      { "id": "church", "label": "Iglesia" },
+      { "id": "unknown-planet", "label": "Planeta Desconocido" },
+      { "id": "saturn", "label": "Saturno" },
+      { "id": "mars", "label": "Marte" }
     ]
   },
   {
@@ -172,7 +185,12 @@
       { "id": "streetwear", "label": "Streetwear" },
       { "id": "k-pop", "label": "K-Pop" },
       { "id": "dog-moms", "label": "Mamás de Perros" },
-      { "id": "dark-academia", "label": "Dark Academia" }
+      { "id": "dark-academia", "label": "Dark Academia" },
+      { "id": "queer", "label": "Queer" },
+      { "id": "women", "label": "Mujeres" },
+      { "id": "mums", "label": "Mamás" },
+      { "id": "gaymers", "label": "Gaymers" },
+      { "id": "girl-power", "label": "Girl Power" }
     ]
   },
   {
@@ -188,7 +206,10 @@
       { "id": "seniors", "label": "Adultos mayores" },
       { "id": "gen-z", "label": "Generación Z" },
       { "id": "millennials", "label": "Millennials" },
-      { "id": "families", "label": "Familias" }
+      { "id": "families", "label": "Familias" },
+      { "id": "babies", "label": "Bebés" },
+      { "id": "elderly", "label": "Ancianos" },
+      { "id": "couples", "label": "Parejas" }
     ]
   },
   {
@@ -221,7 +242,9 @@
       { "id": "candle", "label": "Vela" },
       { "id": "chair", "label": "Silla" },
       { "id": "notebook", "label": "Cuaderno" },
-      { "id": "umbrella", "label": "Paraguas" }
+      { "id": "umbrella", "label": "Paraguas" },
+      { "id": "cards", "label": "Cartas" },
+      { "id": "carpet", "label": "Alfombra" }
     ]
   },
   {
@@ -245,6 +268,34 @@
       { "id": "pop-art", "label": "Arte Pop" },
       { "id": "vintage-postcard", "label": "Postal Vintage" },
       { "id": "risograph", "label": "Risografía" }
+    ]
+  },
+  {
+    "id": "products",
+    "name": "Productos",
+    "options": [
+      { "id": "posters", "label": "Pósters" },
+      { "id": "piggy-bank", "label": "Alcancía" },
+      { "id": "coasters", "label": "Posavasos" },
+      { "id": "ties", "label": "Corbatas" },
+      { "id": "shoelaces", "label": "Cordones de Zapatos" },
+      { "id": "nail-clippers", "label": "Cortaúñas" },
+      { "id": "bookmarkers", "label": "Marcapáginas" },
+      { "id": "deck-of-cards", "label": "Baraja de Cartas" },
+      { "id": "bibs", "label": "Baberos" },
+      { "id": "handbags", "label": "Bolsos" },
+      { "id": "postcards", "label": "Postales" },
+      { "id": "digital-assets", "label": "Activos Digitales" }
+    ]
+  },
+  {
+    "id": "living-things",
+    "name": "Seres Vivos",
+    "options": [
+      { "id": "cat", "label": "Gato" },
+      { "id": "plants", "label": "Plantas" },
+      { "id": "dinosaurs", "label": "Dinosaurios" },
+      { "id": "aliens", "label": "Extraterrestres" }
     ]
   }
 ]
