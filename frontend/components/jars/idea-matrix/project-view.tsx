@@ -14,6 +14,7 @@ import {
   deleteAxisOption,
   deleteCandidate,
   deleteProject,
+  randomizeCandidateSelections,
   renameAxis,
   renameAxisOption,
   renameCandidate,
@@ -22,6 +23,7 @@ import {
   setCandidateScore,
   setCandidateSelection,
   toggleAxisOptionFavorite,
+  toggleCandidateAxisLock,
 } from '@/lib/idea-matrix';
 import { useIdeaMatrixProjects } from '@/lib/use-idea-matrix';
 import { ArrowLeft, Plus, Shuffle } from 'lucide-react';
@@ -152,6 +154,8 @@ export const ProjectView = ({ projectId }: ProjectViewProps) => {
             }
             onScoreChange={(candidateId, field, value) => setCandidateScore(project.id, candidateId, field, value)}
             onNotesChange={(candidateId, notes) => setCandidateNotes(project.id, candidateId, notes)}
+            onToggleAxisLock={(candidateId, axisId) => toggleCandidateAxisLock(project.id, candidateId, axisId)}
+            onRandomize={(candidateId) => randomizeCandidateSelections(project.id, candidateId)}
           />
         )}
       </section>

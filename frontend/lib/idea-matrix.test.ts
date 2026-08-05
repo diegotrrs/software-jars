@@ -12,6 +12,7 @@ import {
   deleteCandidate,
   deleteProject,
   getProject,
+  randomizeCandidateSelections,
   renameAxis,
   renameAxisOption,
   renameCandidate,
@@ -21,6 +22,7 @@ import {
   setCandidateScore,
   setCandidateSelection,
   toggleAxisOptionFavorite,
+  toggleCandidateAxisLock,
 } from './idea-matrix';
 
 beforeEach(() => {
@@ -80,6 +82,17 @@ describe('axes', () => {
 
     expect(getProject(project.id)?.axes).toEqual([]);
     expect(getProject(project.id)?.candidates[0].selections).toEqual({});
+  });
+
+  it('deleting an axis also clears any candidate lock referencing it', () => {
+    const project = createProject('Project');
+    const axis = addAxis(project.id, 'Niche');
+    const candidate = addCandidate(project.id, 'Idea 1');
+    toggleCandidateAxisLock(project.id, candidate.id, axis.id);
+
+    deleteAxis(project.id, axis.id);
+
+    expect(getProject(project.id)?.candidates[0].lockedAxisIds).toEqual([]);
   });
 
   it('adds a whole category as a new axis, with fresh ids and unfavorited options', () => {
@@ -263,6 +276,97 @@ describe('candidates', () => {
     expect(candidate.scores).toEqual({ demand: 3, competition: 3, effort: 3, differentiation: 3 });
     expect(candidate.notes).toBe('');
     expect(getProject(project.id)?.candidates).toEqual([candidate]);
+  });
+
+  it('a new candidate starts with no locked axes', () => {
+    const project = createProject('Project');
+    const candidate = addCandidate(project.id, 'Idea 1');
+    expect(candidate.lockedAxisIds).toEqual([]);
+  });
+});
+
+describe('locking and randomizing candidate selections', () => {
+  it('toggles a lock on and off', () => {
+    const project = createProject('Project');
+    const axis = addAxis(project.id, 'Niche');
+    const candidate = addCandidate(project.id, 'Idea 1');
+
+    toggleCandidateAxisLock(project.id, candidate.id, axis.id);
+    expect(getProject(project.id)?.candidates[0].lockedAxisIds).toEqual([axis.id]);
+
+    toggleCandidateAxisLock(project.id, candidate.id, axis.id);
+    expect(getProject(project.id)?.candidates[0].lockedAxisIds).toEqual([]);
+  });
+
+  it('locking one axis does not affect another', () => {
+    const project = createProject('Project');
+    const a = addAxis(project.id, 'A');
+    const b = addAxis(project.id, 'B');
+    const candidate = addCandidate(project.id, 'Idea 1');
+
+    toggleCandidateAxisLock(project.id, candidate.id, a.id);
+
+    expect(getProject(project.id)?.candidates[0].lockedAxisIds).toEqual([a.id]);
+    expect(getProject(project.id)?.candidates[0].lockedAxisIds).not.toContain(b.id);
+  });
+
+  it('randomizeCandidateSelections leaves a locked axis untouched but re-rolls unlocked ones', () => {
+    const project = createProject('Project');
+    const niche = addAxis(project.id, 'Niche');
+    const vintage = addAxisOption(project.id, niche.id, 'Vintage');
+    const audience = addAxis(project.id, 'Audience');
+    const devs = addAxisOption(project.id, audience.id, 'Devs');
+    const candidate = addCandidate(project.id, 'Idea 1');
+
+    setCandidateSelection(project.id, candidate.id, niche.id, vintage.id);
+    toggleCandidateAxisLock(project.id, candidate.id, niche.id);
+
+    randomizeCandidateSelections(project.id, candidate.id);
+
+    const updated = getProject(project.id)?.candidates[0];
+    expect(updated?.selections[niche.id]).toBe(vintage.id);
+    expect(updated?.selections[audience.id]).toBe(devs.id);
+  });
+
+  it('randomizeCandidateSelections leaves an unlocked axis with no options unselected', () => {
+    const project = createProject('Project');
+    const empty = addAxis(project.id, 'Empty axis');
+    const candidate = addCandidate(project.id, 'Idea 1');
+
+    randomizeCandidateSelections(project.id, candidate.id);
+
+    expect(getProject(project.id)?.candidates[0].selections[empty.id]).toBeUndefined();
+  });
+
+  // Regression: candidates saved before this feature shipped have no
+  // lockedAxisIds in their persisted localStorage JSON at all (not even an
+  // empty array) — reading `.includes`/`.filter` off that `undefined` used
+  // to throw instead of treating it as "nothing locked".
+  it('treats a candidate with no lockedAxisIds field (pre-feature localStorage data) as fully unlocked', () => {
+    const project = createProject('Project');
+    const axis = addAxis(project.id, 'Niche');
+    const vintage = addAxisOption(project.id, axis.id, 'Vintage');
+    const candidate = addCandidate(project.id, 'Idea 1');
+
+    // Simulate legacy data: write the project back to localStorage with the
+    // candidate's lockedAxisIds field stripped out entirely, then force the
+    // store to re-read from localStorage instead of its in-memory cache.
+    const legacyState = {
+      projects: [
+        {
+          ...project,
+          axes: [{ ...axis, options: [vintage] }],
+          candidates: [{ id: candidate.id, name: '', selections: {}, scores: candidate.scores, notes: '' }],
+        },
+      ],
+    };
+    resetIdeaMatrixStoreForTests();
+    window.localStorage.setItem('software-jars:idea-matrix', JSON.stringify(legacyState));
+
+    expect(() => toggleCandidateAxisLock(project.id, candidate.id, axis.id)).not.toThrow();
+    expect(getProject(project.id)?.candidates[0].lockedAxisIds).toEqual([axis.id]);
+
+    expect(() => randomizeCandidateSelections(project.id, candidate.id)).not.toThrow();
   });
 });
 

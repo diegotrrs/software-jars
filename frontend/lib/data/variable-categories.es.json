@@ -196,6 +196,7 @@
     "name": "Época",
     "options": [
       { "id": "futuristic", "label": "Futurista" },
+      { "id": "seventies", "label": "Años 70" },
       { "id": "eighties", "label": "Años 80" },
       { "id": "nineties", "label": "Años 90" },
       { "id": "medieval", "label": "Medieval" },
@@ -221,6 +222,29 @@
       { "id": "chair", "label": "Silla" },
       { "id": "notebook", "label": "Cuaderno" },
       { "id": "umbrella", "label": "Paraguas" }
+    ]
+  },
+  {
+    "id": "art-style",
+    "name": "Estilo Artístico",
+    "options": [
+      { "id": "watercolour", "label": "Acuarela" },
+      { "id": "gouache", "label": "Gouache" },
+      { "id": "impasto", "label": "Impasto" },
+      { "id": "acrylic", "label": "Acrílico" },
+      { "id": "ink-wash", "label": "Aguada de Tinta" },
+      { "id": "woodcut", "label": "Xilografía Vintage" },
+      { "id": "linocut", "label": "Linograbado" },
+      { "id": "comic-books", "label": "Cómics" },
+      { "id": "childrens-book-illustration", "label": "Ilustración de Libros Infantiles" },
+      { "id": "flat-vector-illustration", "label": "Ilustración Vectorial Plana" },
+      { "id": "line-art-illustration", "label": "Ilustración de Línea" },
+      { "id": "doodle-illustration", "label": "Ilustración Doodle" },
+      { "id": "kawaii", "label": "Kawaii" },
+      { "id": "retro-cartoon", "label": "Dibujos Animados Retro" },
+      { "id": "pop-art", "label": "Arte Pop" },
+      { "id": "vintage-postcard", "label": "Postal Vintage" },
+      { "id": "risograph", "label": "Risografía" }
     ]
   }
 ]

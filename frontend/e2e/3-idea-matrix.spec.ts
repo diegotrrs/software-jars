@@ -105,6 +105,67 @@ test.describe('@3. idea matrix', () => {
     await expect(page.getByTestId('candidate-axis-select')).toHaveValue(/.+/);
   });
 
+  test('@3.7b locking a candidate variable toggles on and off', async ({ page }) => {
+    await page.getByTestId('new-project').click();
+    await page.waitForURL(/\/jars\/idea-matrix\/.+/);
+
+    await page.getByTestId('add-axis').click();
+    await page.locator('input[data-testid="new-axis-option"]').fill('Vintage');
+    await page.getByTestId('add-axis-option').click();
+    await page.getByTestId('add-candidate').click();
+
+    const lockButton = page.getByTestId('candidate-axis-lock');
+    await expect(lockButton).toHaveAttribute('aria-pressed', 'false');
+
+    await lockButton.click();
+    await expect(lockButton).toHaveAttribute('aria-pressed', 'true');
+
+    await lockButton.click();
+    await expect(lockButton).toHaveAttribute('aria-pressed', 'false');
+  });
+
+  test('@3.7c the per-idea Random button re-rolls only the unlocked variables', async ({ page }) => {
+    await page.getByTestId('new-project').click();
+    await page.waitForURL(/\/jars\/idea-matrix\/.+/);
+
+    await page.getByTestId('add-axis').click();
+    await page.locator('input[data-testid="axis-name"]').fill('Niche');
+    await page.locator('input[data-testid="axis-name"]').blur();
+
+    await page.getByTestId('add-axis').click();
+    await page.locator('input[data-testid="axis-name"]').fill('Mood');
+    await page.locator('input[data-testid="axis-name"]').blur();
+
+    const nicheAxis = page.getByTestId('axis').nth(0);
+    const moodAxis = page.getByTestId('axis').nth(1);
+
+    await nicheAxis.locator('input[data-testid="new-axis-option"]').fill('Vintage');
+    await nicheAxis.getByTestId('add-axis-option').click();
+
+    await moodAxis.locator('input[data-testid="new-axis-option"]').fill('Happy');
+    await moodAxis.getByTestId('add-axis-option').click();
+    await moodAxis.locator('input[data-testid="new-axis-option"]').fill('Sad');
+    await moodAxis.getByTestId('add-axis-option').click();
+
+    await page.getByTestId('add-candidate').click();
+
+    const selects = page.getByTestId('candidate-axis-select');
+    await selects.nth(0).selectOption({ label: 'Vintage' });
+    const nicheValue = await selects.nth(0).inputValue();
+
+    const lockButtons = page.getByTestId('candidate-axis-lock');
+    await lockButtons.nth(0).click();
+    await expect(lockButtons.nth(0)).toHaveAttribute('aria-pressed', 'true');
+
+    await page.getByTestId('candidate-randomize').click();
+
+    // Locked "Niche" keeps its exact value; unlocked "Mood" went from
+    // unselected to some real option — the point of the per-idea Random
+    // button is exactly this asymmetry.
+    await expect(selects.nth(0)).toHaveValue(nicheValue);
+    await expect(selects.nth(1)).toHaveValue(/.+/);
+  });
+
   test('@3.8 favoriting an axis option toggles on and off', async ({ page }) => {
     await page.getByTestId('new-project').click();
     await page.waitForURL(/\/jars\/idea-matrix\/.+/);
@@ -127,7 +188,7 @@ test.describe('@3. idea matrix', () => {
     await page.getByTestId('new-project').click();
     await page.waitForURL(/\/jars\/idea-matrix\/.+/);
 
-    await expect(page.getByTestId('category-chip')).toHaveCount(16);
+    await expect(page.getByTestId('category-chip')).toHaveCount(17);
 
     await page.getByTestId('category-search-input').fill('tennis');
     await expect(page.getByTestId('category-chip')).toHaveCount(1);

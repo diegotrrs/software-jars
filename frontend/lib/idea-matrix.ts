@@ -26,6 +26,7 @@ export type Candidate = {
   id: string;
   name: string;
   selections: Record<string, string>; // axisId -> optionId
+  lockedAxisIds: string[]; // axes randomizeCandidateSelections must leave untouched
   scores: Scores;
   notes: string;
 };
@@ -55,6 +56,11 @@ const generateId = (): string =>
   typeof crypto !== 'undefined' && 'randomUUID' in crypto
     ? crypto.randomUUID()
     : Math.random().toString(36).slice(2);
+
+// Candidates saved before the lock/randomize feature shipped have no
+// lockedAxisIds in their persisted localStorage data — treat that as "no
+// axes locked" rather than crashing on `.includes`/`.filter` of undefined.
+const getLockedAxisIds = (candidate: Candidate): string[] => candidate.lockedAxisIds ?? [];
 
 // Demand and differentiation pull the score up; competition and effort pull it down.
 export const computeScore = (scores: Scores): number =>
@@ -128,17 +134,18 @@ export const addAxisFromCategory = (projectId: string, category: VariableCategor
   return axis;
 };
 
-// Also strips this axis's key from every candidate's selections, since a
-// selection referencing a deleted axis is meaningless.
+// Also strips this axis's key from every candidate's selections and lock
+// state, since referencing a deleted axis is meaningless either way.
 export const deleteAxis = (projectId: string, axisId: string): void => {
   updateProject(projectId, (project) => ({
     ...project,
     axes: project.axes.filter((axis) => axis.id !== axisId),
     candidates: project.candidates.map((candidate) => {
-      if (!(axisId in candidate.selections)) return candidate;
+      const lockedAxisIds = getLockedAxisIds(candidate);
+      if (!(axisId in candidate.selections) && !lockedAxisIds.includes(axisId)) return candidate;
       const selections = { ...candidate.selections };
       delete selections[axisId];
-      return { ...candidate, selections };
+      return { ...candidate, selections, lockedAxisIds: lockedAxisIds.filter((id) => id !== axisId) };
     }),
   }));
 };
@@ -182,7 +189,14 @@ export const deleteAxisOption = (projectId: string, axisId: string, optionId: st
 };
 
 export const addCandidate = (projectId: string, name = ''): Candidate => {
-  const candidate: Candidate = { id: generateId(), name, selections: {}, scores: { ...DEFAULT_SCORES }, notes: '' };
+  const candidate: Candidate = {
+    id: generateId(),
+    name,
+    selections: {},
+    lockedAxisIds: [],
+    scores: { ...DEFAULT_SCORES },
+    notes: '',
+  };
   updateProject(projectId, (project) => ({ ...project, candidates: [...project.candidates, candidate] }));
   return candidate;
 };
@@ -200,7 +214,14 @@ export const addRandomCandidate = (projectId: string): Candidate => {
     selections[axis.id] = randomOption.id;
   }
 
-  const candidate: Candidate = { id: generateId(), name: '', selections, scores: { ...DEFAULT_SCORES }, notes: '' };
+  const candidate: Candidate = {
+    id: generateId(),
+    name: '',
+    selections,
+    lockedAxisIds: [],
+    scores: { ...DEFAULT_SCORES },
+    notes: '',
+  };
   updateProject(projectId, (proj) => ({ ...proj, candidates: [...proj.candidates, candidate] }));
   return candidate;
 };
@@ -228,6 +249,38 @@ export const setCandidateSelection = (
     else delete selections[axisId];
     return { ...candidate, selections };
   });
+};
+
+export const toggleCandidateAxisLock = (projectId: string, candidateId: string, axisId: string): void => {
+  updateCandidate(projectId, candidateId, (candidate) => {
+    const lockedAxisIds = getLockedAxisIds(candidate);
+    return {
+      ...candidate,
+      lockedAxisIds: lockedAxisIds.includes(axisId)
+        ? lockedAxisIds.filter((id) => id !== axisId)
+        : [...lockedAxisIds, axisId],
+    };
+  });
+};
+
+// Re-rolls a random option for every axis that isn't in this candidate's
+// lockedAxisIds (axes with no options are left as-is — nothing to pick
+// from). Locked axes, including ones with no selection yet, are untouched.
+export const randomizeCandidateSelections = (projectId: string, candidateId: string): void => {
+  const project = getSnapshot().projects.find((p) => p.id === projectId);
+  const candidate = project?.candidates.find((c) => c.id === candidateId);
+  if (!project || !candidate) return;
+
+  const lockedAxisIds = getLockedAxisIds(candidate);
+  const selections = { ...candidate.selections };
+  for (const axis of project.axes) {
+    if (lockedAxisIds.includes(axis.id)) continue;
+    if (axis.options.length === 0) continue;
+    const randomOption = axis.options[Math.floor(Math.random() * axis.options.length)];
+    selections[axis.id] = randomOption.id;
+  }
+
+  updateCandidate(projectId, candidateId, (c) => ({ ...c, selections }));
 };
 
 export const setCandidateScore = (
