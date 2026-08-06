@@ -17,7 +17,12 @@
       { "id": "running", "label": "Running" },
       { "id": "american-football", "label": "Fútbol Americano" },
       { "id": "table-tennis", "label": "Tenis de Mesa" },
-      { "id": "badminton", "label": "Bádminton" }
+      { "id": "badminton", "label": "Bádminton" },
+      { "id": "boxing", "label": "Boxeo" },
+      { "id": "surfing", "label": "Surf" },
+      { "id": "skateboarding", "label": "Skate" },
+      { "id": "hockey", "label": "Hockey" },
+      { "id": "skiing", "label": "Esquí" }
     ]
   },
   {
@@ -38,7 +43,12 @@
       { "id": "spring", "label": "Primavera" },
       { "id": "summer", "label": "Verano" },
       { "id": "autumn", "label": "Otoño" },
-      { "id": "winter", "label": "Invierno" }
+      { "id": "winter", "label": "Invierno" },
+      { "id": "monsoon", "label": "Monzón" },
+      { "id": "dry-season", "label": "Estación Seca" },
+      { "id": "wet-season", "label": "Estación Húmeda" },
+      { "id": "hurricane-season", "label": "Temporada de Huracanes" },
+      { "id": "harvest-season", "label": "Temporada de Cosecha" }
     ]
   },
   {
@@ -49,7 +59,17 @@
       { "id": "cat", "label": "Gato" },
       { "id": "elephant", "label": "Elefante" },
       { "id": "dolphin", "label": "Delfín" },
-      { "id": "eagle", "label": "Águila" }
+      { "id": "eagle", "label": "Águila" },
+      { "id": "lion", "label": "León" },
+      { "id": "tiger", "label": "Tigre" },
+      { "id": "panda", "label": "Panda" },
+      { "id": "owl", "label": "Búho" },
+      { "id": "fox", "label": "Zorro" },
+      { "id": "bear", "label": "Oso" },
+      { "id": "rabbit", "label": "Conejo" },
+      { "id": "horse", "label": "Caballo" },
+      { "id": "penguin", "label": "Pingüino" },
+      { "id": "wolf", "label": "Lobo" }
     ]
   },
   {
@@ -60,7 +80,12 @@
       { "id": "rainy", "label": "Lluvioso" },
       { "id": "cloudy", "label": "Nublado" },
       { "id": "snowy", "label": "Nevado" },
-      { "id": "windy", "label": "Ventoso" }
+      { "id": "windy", "label": "Ventoso" },
+      { "id": "foggy", "label": "Neblinoso" },
+      { "id": "stormy", "label": "Tormentoso" },
+      { "id": "humid", "label": "Húmedo" },
+      { "id": "hail", "label": "Granizo" },
+      { "id": "thunderstorm", "label": "Tormenta Eléctrica" }
     ]
   },
   {
@@ -71,7 +96,12 @@
       { "id": "jazz", "label": "Jazz" },
       { "id": "classical", "label": "Clásica" },
       { "id": "hip-hop", "label": "Hip-Hop" },
-      { "id": "electronic", "label": "Electrónica" }
+      { "id": "electronic", "label": "Electrónica" },
+      { "id": "pop", "label": "Pop" },
+      { "id": "country", "label": "Country" },
+      { "id": "rnb", "label": "R&B" },
+      { "id": "reggae", "label": "Reggae" },
+      { "id": "metal", "label": "Metal" }
     ]
   },
   {
@@ -112,7 +142,12 @@
       { "id": "death", "label": "Fallecimiento" },
       { "id": "new-job", "label": "Nuevo Trabajo" },
       { "id": "new-baby", "label": "Nuevo Bebé" },
-      { "id": "first-date", "label": "Primera Cita" }
+      { "id": "first-date", "label": "Primera Cita" },
+      { "id": "valentines-day", "label": "Día de San Valentín" },
+      { "id": "halloween", "label": "Halloween" },
+      { "id": "engagement", "label": "Compromiso" },
+      { "id": "promotion", "label": "Ascenso" },
+      { "id": "mothers-day", "label": "Día de la Madre" }
     ]
   },
   {
@@ -133,7 +168,12 @@
       { "id": "hot", "label": "Caliente" },
       { "id": "sexy", "label": "Sexy" },
       { "id": "loved", "label": "Amado" },
-      { "id": "cute", "label": "Tierno" }
+      { "id": "cute", "label": "Tierno" },
+      { "id": "angry", "label": "Enojado" },
+      { "id": "calm", "label": "Tranquilo" },
+      { "id": "bored", "label": "Aburrido" },
+      { "id": "curious", "label": "Curioso" },
+      { "id": "proud", "label": "Orgulloso" }
     ]
   },
   {
@@ -169,7 +209,12 @@
       { "id": "church", "label": "Iglesia" },
       { "id": "unknown-planet", "label": "Planeta Desconocido" },
       { "id": "saturn", "label": "Saturno" },
-      { "id": "mars", "label": "Marte" }
+      { "id": "mars", "label": "Marte" },
+      { "id": "park", "label": "Parque" },
+      { "id": "library", "label": "Biblioteca" },
+      { "id": "restaurant", "label": "Restaurante" },
+      { "id": "hospital", "label": "Hospital" },
+      { "id": "stadium", "label": "Estadio" }
     ]
   },
   {
@@ -190,7 +235,12 @@
       { "id": "women", "label": "Mujeres" },
       { "id": "mums", "label": "Mamás" },
       { "id": "gaymers", "label": "Gaymers" },
-      { "id": "girl-power", "label": "Girl Power" }
+      { "id": "girl-power", "label": "Girl Power" },
+      { "id": "otaku", "label": "Otaku" },
+      { "id": "metalhead", "label": "Metalero" },
+      { "id": "vegan", "label": "Vegano" },
+      { "id": "cosplayer", "label": "Cosplayer" },
+      { "id": "bookworm", "label": "Ratón de Biblioteca" }
     ]
   },
   {
@@ -209,7 +259,17 @@
       { "id": "families", "label": "Familias" },
       { "id": "babies", "label": "Bebés" },
       { "id": "elderly", "label": "Ancianos" },
-      { "id": "couples", "label": "Parejas" }
+      { "id": "couples", "label": "Parejas" },
+      { "id": "parents", "label": "Padres" },
+      { "id": "students", "label": "Estudiantes" },
+      { "id": "professionals", "label": "Profesionales" },
+      { "id": "newborns", "label": "Recién Nacidos" },
+      { "id": "singles", "label": "Solteros" },
+      { "id": "men", "label": "Hombres" },
+      { "id": "women", "label": "Mujeres" },
+      { "id": "pet-owners", "label": "Dueños de Mascotas" },
+      { "id": "remote-workers", "label": "Trabajadores Remotos" },
+      { "id": "entrepreneurs", "label": "Emprendedores" }
     ]
   },
   {
@@ -226,7 +286,12 @@
       { "id": "prehistoric", "label": "Prehistórico" },
       { "id": "renaissance", "label": "Renacimiento" },
       { "id": "y2k", "label": "Y2K" },
-      { "id": "retro", "label": "Retro" }
+      { "id": "retro", "label": "Retro" },
+      { "id": "ancient-rome", "label": "Antigua Roma" },
+      { "id": "ancient-greece", "label": "Antigua Grecia" },
+      { "id": "industrial-revolution", "label": "Revolución Industrial" },
+      { "id": "two-thousands", "label": "Años 2000" },
+      { "id": "twenty-tens", "label": "Años 2010" }
     ]
   },
   {
@@ -244,7 +309,22 @@
       { "id": "notebook", "label": "Cuaderno" },
       { "id": "umbrella", "label": "Paraguas" },
       { "id": "cards", "label": "Cartas" },
-      { "id": "carpet", "label": "Alfombra" }
+      { "id": "carpet", "label": "Alfombra" },
+      { "id": "water-bottle", "label": "Botella de Agua" },
+      { "id": "gym-bag", "label": "Bolsa de Gimnasio" },
+      { "id": "towel", "label": "Toalla" },
+      { "id": "whistle", "label": "Silbato" },
+      { "id": "trophy", "label": "Trofeo" },
+      { "id": "medal", "label": "Medalla" },
+      { "id": "jersey", "label": "Camiseta" },
+      { "id": "sneakers", "label": "Zapatillas" },
+      { "id": "headband", "label": "Cinta para la Cabeza" },
+      { "id": "wristband", "label": "Muñequera" },
+      { "id": "keys", "label": "Llaves" },
+      { "id": "wallet", "label": "Billetera" },
+      { "id": "sunglasses", "label": "Gafas de Sol" },
+      { "id": "headphones", "label": "Audífonos" },
+      { "id": "charger", "label": "Cargador" }
     ]
   },
   {
@@ -285,7 +365,12 @@
       { "id": "bibs", "label": "Baberos" },
       { "id": "handbags", "label": "Bolsos" },
       { "id": "postcards", "label": "Postales" },
-      { "id": "digital-assets", "label": "Activos Digitales" }
+      { "id": "digital-assets", "label": "Activos Digitales" },
+      { "id": "tote-bags", "label": "Bolsas de Tela" },
+      { "id": "stickers", "label": "Pegatinas" },
+      { "id": "phone-cases", "label": "Fundas de Teléfono" },
+      { "id": "keychains", "label": "Llaveros" },
+      { "id": "t-shirts", "label": "Camisetas" }
     ]
   },
   {
@@ -295,7 +380,17 @@
       { "id": "cat", "label": "Gato" },
       { "id": "plants", "label": "Plantas" },
       { "id": "dinosaurs", "label": "Dinosaurios" },
-      { "id": "aliens", "label": "Extraterrestres" }
+      { "id": "aliens", "label": "Extraterrestres" },
+      { "id": "dog", "label": "Perro" },
+      { "id": "humans", "label": "Humanos" },
+      { "id": "birds", "label": "Aves" },
+      { "id": "fish", "label": "Peces" },
+      { "id": "insects", "label": "Insectos" },
+      { "id": "bear", "label": "Oso" },
+      { "id": "butterfly", "label": "Mariposa" },
+      { "id": "snake", "label": "Serpiente" },
+      { "id": "spider", "label": "Araña" },
+      { "id": "bee", "label": "Abeja" }
     ]
   }
 ]

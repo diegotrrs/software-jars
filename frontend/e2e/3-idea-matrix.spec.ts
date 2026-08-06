@@ -199,11 +199,15 @@ test.describe('@3. idea matrix', () => {
     await page.getByTestId('new-project').click();
     await page.waitForURL(/\/jars\/idea-matrix\/.+/);
 
-    await page.getByTestId('category-search-input').fill('Sports');
+    // Colors is used here (rather than a bigger, content-heavy category like
+    // Sports) specifically because its option count is stable — content
+    // categories get new options added over time, which would otherwise
+    // make this assertion break on every such change.
+    await page.getByTestId('category-search-input').fill('Colors');
     await page.getByTestId('category-chip').click();
 
-    await expect(page.getByTestId('category-preview-option')).toHaveCount(15);
-    await expect(page.getByTestId('category-add-button')).toHaveText('Add "Sports" (15) to your Categories');
+    await expect(page.getByTestId('category-preview-option')).toHaveCount(5);
+    await expect(page.getByTestId('category-add-button')).toHaveText('Add "Colors" (5) to your Categories');
     await expect(page.getByTestId('axis')).toHaveCount(0);
 
     await page.getByTestId('category-chip').click();
@@ -214,13 +218,13 @@ test.describe('@3. idea matrix', () => {
     await page.getByTestId('new-project').click();
     await page.waitForURL(/\/jars\/idea-matrix\/.+/);
 
-    await page.getByTestId('category-search-input').fill('Sports');
+    await page.getByTestId('category-search-input').fill('Colors');
     await page.getByTestId('category-chip').click();
     await page.getByTestId('category-add-button').click();
 
     await expect(page.getByTestId('axis')).toHaveCount(1);
-    await expect(page.getByTestId('axis-name')).toHaveText('Sports');
-    await expect(page.getByTestId('axis-option')).toHaveCount(15);
+    await expect(page.getByTestId('axis-name')).toHaveText('Colors');
+    await expect(page.getByTestId('axis-option')).toHaveCount(5);
     await expect(page.getByTestId('category-preview')).toBeHidden();
   });
 
@@ -228,11 +232,11 @@ test.describe('@3. idea matrix', () => {
     await page.getByTestId('new-project').click();
     await page.waitForURL(/\/jars\/idea-matrix\/.+/);
 
-    await page.getByTestId('category-search-input').fill('Sports');
+    await page.getByTestId('category-search-input').fill('Colors');
     await page.getByTestId('category-chip').click();
     await page.getByTestId('category-add-button').click();
 
-    await expect(page.getByTestId('category-added-toast')).toHaveText('"Sports" added');
+    await expect(page.getByTestId('category-added-toast')).toHaveText('"Colors" added');
     await expect(page.getByTestId('category-added-toast')).toBeHidden({ timeout: 3000 });
   });
 });

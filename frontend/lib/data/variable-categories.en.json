@@ -17,7 +17,12 @@
       { "id": "running", "label": "Running" },
       { "id": "american-football", "label": "American Football" },
       { "id": "table-tennis", "label": "Table Tennis" },
-      { "id": "badminton", "label": "Badminton" }
+      { "id": "badminton", "label": "Badminton" },
+      { "id": "boxing", "label": "Boxing" },
+      { "id": "surfing", "label": "Surfing" },
+      { "id": "skateboarding", "label": "Skateboarding" },
+      { "id": "hockey", "label": "Hockey" },
+      { "id": "skiing", "label": "Skiing" }
     ]
   },
   {
@@ -38,7 +43,12 @@
       { "id": "spring", "label": "Spring" },
       { "id": "summer", "label": "Summer" },
       { "id": "autumn", "label": "Autumn" },
-      { "id": "winter", "label": "Winter" }
+      { "id": "winter", "label": "Winter" },
+      { "id": "monsoon", "label": "Monsoon" },
+      { "id": "dry-season", "label": "Dry Season" },
+      { "id": "wet-season", "label": "Wet Season" },
+      { "id": "hurricane-season", "label": "Hurricane Season" },
+      { "id": "harvest-season", "label": "Harvest Season" }
     ]
   },
   {
@@ -49,7 +59,17 @@
       { "id": "cat", "label": "Cat" },
       { "id": "elephant", "label": "Elephant" },
       { "id": "dolphin", "label": "Dolphin" },
-      { "id": "eagle", "label": "Eagle" }
+      { "id": "eagle", "label": "Eagle" },
+      { "id": "lion", "label": "Lion" },
+      { "id": "tiger", "label": "Tiger" },
+      { "id": "panda", "label": "Panda" },
+      { "id": "owl", "label": "Owl" },
+      { "id": "fox", "label": "Fox" },
+      { "id": "bear", "label": "Bear" },
+      { "id": "rabbit", "label": "Rabbit" },
+      { "id": "horse", "label": "Horse" },
+      { "id": "penguin", "label": "Penguin" },
+      { "id": "wolf", "label": "Wolf" }
     ]
   },
   {
@@ -60,7 +80,12 @@
       { "id": "rainy", "label": "Rainy" },
       { "id": "cloudy", "label": "Cloudy" },
       { "id": "snowy", "label": "Snowy" },
-      { "id": "windy", "label": "Windy" }
+      { "id": "windy", "label": "Windy" },
+      { "id": "foggy", "label": "Foggy" },
+      { "id": "stormy", "label": "Stormy" },
+      { "id": "humid", "label": "Humid" },
+      { "id": "hail", "label": "Hail" },
+      { "id": "thunderstorm", "label": "Thunderstorm" }
     ]
   },
   {
@@ -71,7 +96,12 @@
       { "id": "jazz", "label": "Jazz" },
       { "id": "classical", "label": "Classical" },
       { "id": "hip-hop", "label": "Hip-Hop" },
-      { "id": "electronic", "label": "Electronic" }
+      { "id": "electronic", "label": "Electronic" },
+      { "id": "pop", "label": "Pop" },
+      { "id": "country", "label": "Country" },
+      { "id": "rnb", "label": "R&B" },
+      { "id": "reggae", "label": "Reggae" },
+      { "id": "metal", "label": "Metal" }
     ]
   },
   {
@@ -112,7 +142,12 @@
       { "id": "death", "label": "Death" },
       { "id": "new-job", "label": "New Job" },
       { "id": "new-baby", "label": "New Baby" },
-      { "id": "first-date", "label": "First Date" }
+      { "id": "first-date", "label": "First Date" },
+      { "id": "valentines-day", "label": "Valentine's Day" },
+      { "id": "halloween", "label": "Halloween" },
+      { "id": "engagement", "label": "Engagement" },
+      { "id": "promotion", "label": "Promotion" },
+      { "id": "mothers-day", "label": "Mother's Day" }
     ]
   },
   {
@@ -133,7 +168,12 @@
       { "id": "hot", "label": "Hot" },
       { "id": "sexy", "label": "Sexy" },
       { "id": "loved", "label": "Loved" },
-      { "id": "cute", "label": "Cute" }
+      { "id": "cute", "label": "Cute" },
+      { "id": "angry", "label": "Angry" },
+      { "id": "calm", "label": "Calm" },
+      { "id": "bored", "label": "Bored" },
+      { "id": "curious", "label": "Curious" },
+      { "id": "proud", "label": "Proud" }
     ]
   },
   {
@@ -169,7 +209,12 @@
       { "id": "church", "label": "Church" },
       { "id": "unknown-planet", "label": "Unknown Planet" },
       { "id": "saturn", "label": "Saturn" },
-      { "id": "mars", "label": "Mars" }
+      { "id": "mars", "label": "Mars" },
+      { "id": "park", "label": "Park" },
+      { "id": "library", "label": "Library" },
+      { "id": "restaurant", "label": "Restaurant" },
+      { "id": "hospital", "label": "Hospital" },
+      { "id": "stadium", "label": "Stadium" }
     ]
   },
   {
@@ -190,7 +235,12 @@
       { "id": "women", "label": "Women" },
       { "id": "mums", "label": "Mums" },
       { "id": "gaymers", "label": "Gaymers" },
-      { "id": "girl-power", "label": "Girl Power" }
+      { "id": "girl-power", "label": "Girl Power" },
+      { "id": "otaku", "label": "Otaku" },
+      { "id": "metalhead", "label": "Metalhead" },
+      { "id": "vegan", "label": "Vegan" },
+      { "id": "cosplayer", "label": "Cosplayer" },
+      { "id": "bookworm", "label": "Bookworm" }
     ]
   },
   {
@@ -209,7 +259,17 @@
       { "id": "families", "label": "Families" },
       { "id": "babies", "label": "Babies" },
       { "id": "elderly", "label": "Elderly" },
-      { "id": "couples", "label": "Couples" }
+      { "id": "couples", "label": "Couples" },
+      { "id": "parents", "label": "Parents" },
+      { "id": "students", "label": "Students" },
+      { "id": "professionals", "label": "Professionals" },
+      { "id": "newborns", "label": "Newborns" },
+      { "id": "singles", "label": "Singles" },
+      { "id": "men", "label": "Men" },
+      { "id": "women", "label": "Women" },
+      { "id": "pet-owners", "label": "Pet Owners" },
+      { "id": "remote-workers", "label": "Remote Workers" },
+      { "id": "entrepreneurs", "label": "Entrepreneurs" }
     ]
   },
   {
@@ -226,7 +286,12 @@
       { "id": "prehistoric", "label": "Prehistoric" },
       { "id": "renaissance", "label": "Renaissance" },
       { "id": "y2k", "label": "Y2K" },
-      { "id": "retro", "label": "Retro" }
+      { "id": "retro", "label": "Retro" },
+      { "id": "ancient-rome", "label": "Ancient Rome" },
+      { "id": "ancient-greece", "label": "Ancient Greece" },
+      { "id": "industrial-revolution", "label": "Industrial Revolution" },
+      { "id": "two-thousands", "label": "2000s" },
+      { "id": "twenty-tens", "label": "2010s" }
     ]
   },
   {
@@ -244,7 +309,22 @@
       { "id": "notebook", "label": "Notebook" },
       { "id": "umbrella", "label": "Umbrella" },
       { "id": "cards", "label": "Cards" },
-      { "id": "carpet", "label": "Carpet" }
+      { "id": "carpet", "label": "Carpet" },
+      { "id": "water-bottle", "label": "Water Bottle" },
+      { "id": "gym-bag", "label": "Gym Bag" },
+      { "id": "towel", "label": "Towel" },
+      { "id": "whistle", "label": "Whistle" },
+      { "id": "trophy", "label": "Trophy" },
+      { "id": "medal", "label": "Medal" },
+      { "id": "jersey", "label": "Jersey" },
+      { "id": "sneakers", "label": "Sneakers" },
+      { "id": "headband", "label": "Headband" },
+      { "id": "wristband", "label": "Wristband" },
+      { "id": "keys", "label": "Keys" },
+      { "id": "wallet", "label": "Wallet" },
+      { "id": "sunglasses", "label": "Sunglasses" },
+      { "id": "headphones", "label": "Headphones" },
+      { "id": "charger", "label": "Charger" }
     ]
   },
   {
@@ -285,7 +365,12 @@
       { "id": "bibs", "label": "Bibs" },
       { "id": "handbags", "label": "Handbags" },
       { "id": "postcards", "label": "Postcards" },
-      { "id": "digital-assets", "label": "Digital Assets" }
+      { "id": "digital-assets", "label": "Digital Assets" },
+      { "id": "tote-bags", "label": "Tote Bags" },
+      { "id": "stickers", "label": "Stickers" },
+      { "id": "phone-cases", "label": "Phone Cases" },
+      { "id": "keychains", "label": "Keychains" },
+      { "id": "t-shirts", "label": "T-Shirts" }
     ]
   },
   {
@@ -295,7 +380,17 @@
       { "id": "cat", "label": "Cat" },
       { "id": "plants", "label": "Plants" },
       { "id": "dinosaurs", "label": "Dinosaurs" },
-      { "id": "aliens", "label": "Aliens" }
+      { "id": "aliens", "label": "Aliens" },
+      { "id": "dog", "label": "Dog" },
+      { "id": "humans", "label": "Humans" },
+      { "id": "birds", "label": "Birds" },
+      { "id": "fish", "label": "Fish" },
+      { "id": "insects", "label": "Insects" },
+      { "id": "bear", "label": "Bear" },
+      { "id": "butterfly", "label": "Butterfly" },
+      { "id": "snake", "label": "Snake" },
+      { "id": "spider", "label": "Spider" },
+      { "id": "bee", "label": "Bee" }
     ]
   }
 ]
