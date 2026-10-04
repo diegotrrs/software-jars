@@ -174,16 +174,7 @@ export const BoardView = ({ boardId }: BoardViewProps) => {
       </div>
 
       <DndContext sensors={sensors} onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-        <div className='flex flex-1 overflow-hidden'>
-          <StickerPack
-            categories={categories}
-            newestCategoryId={newestCategoryId}
-            onAddCategory={handleAddCategory}
-            onRenameCategory={(categoryId, name) => renameCategory(board.id, categoryId, name)}
-            onRecolorCategory={(categoryId, color) => recolorCategory(board.id, categoryId, color)}
-            onDeleteCategory={(categoryId) => deleteCategory(board.id, categoryId)}
-          />
-
+        <div className='flex flex-1 flex-col overflow-hidden'>
           <div className='flex flex-1 gap-4 overflow-x-auto p-4'>
             <SortableContext items={board.columns.map((c) => columnDragId(c.id))}>
               {board.columns.map((column) => (
@@ -212,6 +203,15 @@ export const BoardView = ({ boardId }: BoardViewProps) => {
               <Plus className='h-4 w-4' /> {t('addColumn')}
             </Button>
           </div>
+
+          <StickerPack
+            categories={categories}
+            newestCategoryId={newestCategoryId}
+            onAddCategory={handleAddCategory}
+            onRenameCategory={(categoryId, name) => renameCategory(board.id, categoryId, name)}
+            onRecolorCategory={(categoryId, color) => recolorCategory(board.id, categoryId, color)}
+            onDeleteCategory={(categoryId) => deleteCategory(board.id, categoryId)}
+          />
         </div>
 
         <DragOverlay>

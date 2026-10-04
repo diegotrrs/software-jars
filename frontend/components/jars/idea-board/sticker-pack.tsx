@@ -18,10 +18,12 @@ type StickerPackProps = {
 
 // The "infinite pack" — a fixed drag source that never depletes. Dropping it
 // on a column spawns a brand-new sticker there; the pack itself never moves.
-// Hidden below md: on narrow/mobile viewports it ate too much horizontal
-// space relative to the columns — the per-column "+" button is the mobile
-// path for adding a sticker there, same md breakpoint the nav already uses
-// to split desktop/mobile.
+// A horizontal bar pinned below the columns — categories get the full board
+// width to wrap into (rather than being squeezed into a narrow sidebar
+// column, which used to clip longer category names). Hidden below md: on
+// narrow/mobile viewports the per-column "+" button is the mobile path for
+// adding a sticker there, same md breakpoint the nav already uses to split
+// desktop/mobile.
 export const StickerPack = ({
   categories,
   newestCategoryId,
@@ -34,22 +36,26 @@ export const StickerPack = ({
   const { attributes, listeners, setNodeRef, isDragging } = useDraggable({ id: PACK_DRAG_ID });
 
   return (
-    <div className='hidden w-36 shrink-0 flex-col items-center gap-3 border-r bg-muted/30 px-3 py-6 md:flex'>
-      <div
-        ref={setNodeRef}
-        data-testid='sticker-pack'
-        className={cn(
-          'relative h-20 w-16 cursor-grab touch-none active:cursor-grabbing',
-          isDragging && 'opacity-50'
-        )}
-        {...attributes}
-        {...listeners}
-      >
-        <div className='absolute inset-0 translate-x-1 translate-y-1 rotate-3 rounded-sm bg-[hsl(50_95%_55%)] shadow' />
-        <div className='absolute inset-0 -translate-x-0.5 translate-y-0.5 -rotate-2 rounded-sm bg-[hsl(50_95%_58%)] shadow' />
-        <div className='absolute inset-0 rounded-sm bg-[hsl(50_95%_62%)] shadow-md' />
+    <div className='hidden shrink-0 items-center gap-4 border-t bg-muted/30 px-4 py-3 md:flex'>
+      <div className='flex shrink-0 items-center gap-3'>
+        <div
+          ref={setNodeRef}
+          data-testid='sticker-pack'
+          className={cn(
+            'relative h-14 w-11 cursor-grab touch-none active:cursor-grabbing',
+            isDragging && 'opacity-50'
+          )}
+          {...attributes}
+          {...listeners}
+        >
+          <div className='absolute inset-0 translate-x-1 translate-y-1 rotate-3 rounded-sm bg-[hsl(50_95%_55%)] shadow' />
+          <div className='absolute inset-0 -translate-x-0.5 translate-y-0.5 -rotate-2 rounded-sm bg-[hsl(50_95%_58%)] shadow' />
+          <div className='absolute inset-0 rounded-sm bg-[hsl(50_95%_62%)] shadow-md' />
+        </div>
+        <p className='w-20 text-xs text-muted-foreground'>{t('pack')}</p>
       </div>
-      <p className='text-center text-xs text-muted-foreground'>{t('pack')}</p>
+
+      <div className='h-10 w-px shrink-0 bg-border' />
 
       <CategoryManager
         categories={categories}

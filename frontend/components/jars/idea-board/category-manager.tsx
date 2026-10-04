@@ -24,9 +24,9 @@ export const CategoryManager = ({
   const t = useTranslations('ideaBoard');
 
   return (
-    <div className='flex w-full flex-col gap-2 border-t px-2 pt-3' data-testid='category-manager'>
-      <p className='text-center text-xs font-medium text-muted-foreground'>{t('categoriesTitle')}</p>
-      <div className='flex flex-col gap-1'>
+    <div className='flex min-w-0 flex-1 items-center gap-2' data-testid='category-manager'>
+      <p className='shrink-0 text-xs font-medium text-muted-foreground'>{t('categoriesTitle')}</p>
+      <div className='flex flex-1 flex-wrap items-center gap-1'>
         {categories.map((category) => (
           <CategoryRow
             key={category.id}
@@ -37,15 +37,15 @@ export const CategoryManager = ({
             onDelete={() => onDelete(category.id)}
           />
         ))}
+        <button
+          type='button'
+          onClick={onAdd}
+          data-testid='add-category'
+          className='shrink-0 rounded-full border border-dashed px-2 py-1 text-xs text-muted-foreground hover:bg-accent'
+        >
+          {t('addNewCategory')}
+        </button>
       </div>
-      <button
-        type='button'
-        onClick={onAdd}
-        data-testid='add-category'
-        className='rounded-full border border-dashed px-2 py-1 text-center text-xs text-muted-foreground hover:bg-accent'
-      >
-        {t('addNewCategory')}
-      </button>
     </div>
   );
 };
@@ -75,7 +75,7 @@ const CategoryRow = ({
 
   return (
     <div
-      className='group flex items-center gap-1 rounded-full border bg-accent/30 py-0.5 pl-1 pr-2'
+      className='group flex shrink-0 items-center gap-1 rounded-full border bg-accent/30 py-0.5 pl-1 pr-2'
       data-testid='category-row'
     >
       <input
@@ -92,7 +92,7 @@ const CategoryRow = ({
         onChange={(e) => onRename(e.target.value)}
         placeholder={t('newCategoryPlaceholder')}
         data-testid='category-name-input'
-        className='w-0 flex-1 bg-transparent text-xs outline-none placeholder:text-muted-foreground'
+        className='w-36 bg-transparent text-xs outline-none placeholder:text-muted-foreground'
       />
       <button
         type='button'
