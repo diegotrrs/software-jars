@@ -11,5 +11,6 @@
 // jars' imports here.
 import '@/lib/idea-board';
 import '@/lib/idea-matrix';
+import '@/lib/timezone-converter';
 
 export const SyncInit = () => null;

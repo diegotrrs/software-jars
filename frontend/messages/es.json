@@ -24,6 +24,26 @@
     "ideaMatrix": {
       "name": "Matriz de Ideas",
       "description": "Combina variables para generar y puntuar ideas de proyectos secundarios."
+    },
+    "uuidGenerator": {
+      "name": "Generador de UUID",
+      "description": "Genera UUID v4 o v1 y cópialos al portapapeles."
+    },
+    "jsonFormatter": {
+      "name": "Formateador de JSON",
+      "description": "Da formato, minifica y valida JSON."
+    },
+    "base64": {
+      "name": "Codificador/Decodificador Base64",
+      "description": "Convierte texto a Base64 y viceversa."
+    },
+    "xmlFormatter": {
+      "name": "Formateador de XML",
+      "description": "Da formato, minifica y valida XML."
+    },
+    "timezoneConverter": {
+      "name": "Convertidor de Zonas Horarias",
+      "description": "Compara un mismo momento en varias zonas horarias."
     }
   },
   "settings": {
@@ -49,6 +69,55 @@
     "rolling": "Lanzando…",
     "total": "Total",
     "resultsLabel": "Resultados"
+  },
+  "uuidGenerator": {
+    "versionLabel": "Versión",
+    "v4Label": "v4 (aleatorio)",
+    "v1Label": "v1 (marca de tiempo)",
+    "countLabel": "Cuántos",
+    "generateButton": "Generar",
+    "resultsLabel": "Resultados",
+    "copyAll": "Copiar todos",
+    "copyOne": "Copiar",
+    "clear": "Limpiar"
+  },
+  "jsonFormatter": {
+    "placeholder": "Pega tu JSON aquí…",
+    "formatButton": "Formatear",
+    "minifyButton": "Minificar",
+    "validateButton": "Validar",
+    "copyButton": "Copiar",
+    "clearButton": "Limpiar",
+    "validMessage": "JSON válido."
+  },
+  "base64": {
+    "textLabel": "Texto",
+    "textPlaceholder": "Texto plano…",
+    "base64Label": "Base64",
+    "base64Placeholder": "Texto codificado en Base64…",
+    "copyText": "Copiar texto",
+    "copyBase64": "Copiar Base64",
+    "encodeButton": "Codificar",
+    "decodeButton": "Decodificar",
+    "clearButton": "Limpiar"
+  },
+  "xmlFormatter": {
+    "placeholder": "Pega tu XML aquí…",
+    "formatButton": "Formatear",
+    "minifyButton": "Minificar",
+    "validateButton": "Validar",
+    "copyButton": "Copiar",
+    "clearButton": "Limpiar",
+    "validMessage": "XML válido."
+  },
+  "timezoneConverter": {
+    "referenceTimeLabel": "Comparar en",
+    "liveLabel": "En vivo",
+    "resetToNow": "Volver a ahora",
+    "youLabel": "Tú",
+    "removeZone": "Eliminar {zone}",
+    "searchPlaceholder": "Añade una ciudad o zona horaria…",
+    "noZonesFound": "No hay zonas horarias que coincidan."
   },
   "ideaBoard": {
     "newBoard": "Nuevo tablero",

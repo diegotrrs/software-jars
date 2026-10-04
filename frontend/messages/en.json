@@ -24,6 +24,26 @@
     "ideaMatrix": {
       "name": "Idea Matrix",
       "description": "Mix and match variables to brainstorm and score side-project ideas."
+    },
+    "uuidGenerator": {
+      "name": "UUID Generator",
+      "description": "Generate v4 or v1 UUIDs and copy them to your clipboard."
+    },
+    "jsonFormatter": {
+      "name": "JSON Formatter",
+      "description": "Pretty-print, minify, and validate JSON."
+    },
+    "base64": {
+      "name": "Base64 Encoder/Decoder",
+      "description": "Convert text to and from Base64."
+    },
+    "xmlFormatter": {
+      "name": "XML Formatter",
+      "description": "Pretty-print, minify, and validate XML."
+    },
+    "timezoneConverter": {
+      "name": "Timezone Converter",
+      "description": "Compare the same moment across multiple timezones."
     }
   },
   "settings": {
@@ -49,6 +69,55 @@
     "rolling": "Rolling…",
     "total": "Total",
     "resultsLabel": "Results"
+  },
+  "uuidGenerator": {
+    "versionLabel": "Version",
+    "v4Label": "v4 (random)",
+    "v1Label": "v1 (timestamp)",
+    "countLabel": "How many",
+    "generateButton": "Generate",
+    "resultsLabel": "Results",
+    "copyAll": "Copy all",
+    "copyOne": "Copy",
+    "clear": "Clear"
+  },
+  "jsonFormatter": {
+    "placeholder": "Paste your JSON here…",
+    "formatButton": "Format",
+    "minifyButton": "Minify",
+    "validateButton": "Validate",
+    "copyButton": "Copy",
+    "clearButton": "Clear",
+    "validMessage": "Valid JSON."
+  },
+  "base64": {
+    "textLabel": "Text",
+    "textPlaceholder": "Plain text…",
+    "base64Label": "Base64",
+    "base64Placeholder": "Base64-encoded text…",
+    "copyText": "Copy text",
+    "copyBase64": "Copy Base64",
+    "encodeButton": "Encode",
+    "decodeButton": "Decode",
+    "clearButton": "Clear"
+  },
+  "xmlFormatter": {
+    "placeholder": "Paste your XML here…",
+    "formatButton": "Format",
+    "minifyButton": "Minify",
+    "validateButton": "Validate",
+    "copyButton": "Copy",
+    "clearButton": "Clear",
+    "validMessage": "Valid XML."
+  },
+  "timezoneConverter": {
+    "referenceTimeLabel": "Compare at",
+    "liveLabel": "Live",
+    "resetToNow": "Back to now",
+    "youLabel": "You",
+    "removeZone": "Remove {zone}",
+    "searchPlaceholder": "Add a city or timezone…",
+    "noZonesFound": "No matching timezones."
   },
   "ideaBoard": {
     "newBoard": "New board",
