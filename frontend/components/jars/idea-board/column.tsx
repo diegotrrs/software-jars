@@ -2,7 +2,7 @@
 import { EditableText } from '@/components/jars/idea-board/editable-text';
 import { Sticker } from '@/components/jars/idea-board/sticker';
 import { Button } from '@/components/ui/button';
-import type { Column as ColumnType } from '@/lib/idea-board';
+import type { Category, Column as ColumnType } from '@/lib/idea-board';
 import { cn } from '@/lib/utils';
 import { useDroppable } from '@dnd-kit/core';
 import { useSortable } from '@dnd-kit/sortable';
@@ -17,22 +17,26 @@ type ColumnProps = {
   column: ColumnType;
   autoFocusTitle?: boolean;
   newestStickerId: string | null;
+  categories: Category[];
   onRename: (title: string) => void;
   onDelete: () => void;
   onAddSticker: () => void;
   onStickerTextChange: (stickerId: string, text: string) => void;
   onStickerDelete: (stickerId: string) => void;
+  onStickerCategoryChange: (stickerId: string, categoryId: string | null) => void;
 };
 
 export const Column = ({
   column,
   autoFocusTitle,
   newestStickerId,
+  categories,
   onRename,
   onDelete,
   onAddSticker,
   onStickerTextChange,
   onStickerDelete,
+  onStickerCategoryChange,
 }: ColumnProps) => {
   const t = useTranslations('ideaBoard');
 
@@ -106,6 +110,9 @@ export const Column = ({
             autoFocus={sticker.id === newestStickerId}
             onTextChange={(text) => onStickerTextChange(sticker.id, text)}
             onDelete={() => onStickerDelete(sticker.id)}
+            categories={categories}
+            categoryId={sticker.categoryId ?? null}
+            onCategoryChange={(categoryId) => onStickerCategoryChange(sticker.id, categoryId)}
           />
         ))}
       </div>

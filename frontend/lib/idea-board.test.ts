@@ -1,17 +1,22 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import {
+  addCategory,
   addColumn,
   addSticker,
   createBoard,
   deleteBoard,
+  deleteCategory,
   deleteColumn,
   deleteSticker,
   getBoard,
   moveSticker,
+  recolorCategory,
   renameBoard,
+  renameCategory,
   renameColumn,
   reorderColumns,
   resetIdeaBoardStoreForTests,
+  setStickerCategory,
   updateStickerText,
 } from './idea-board';
 
@@ -24,6 +29,7 @@ describe('boards', () => {
     const board = createBoard('Trip planning');
     expect(getBoard(board.id)).toEqual(board);
     expect(board.columns).toEqual([]);
+    expect(board.categories).toEqual([]);
   });
 
   it('renames a board', () => {
@@ -86,6 +92,7 @@ describe('stickers', () => {
     expect(sticker.text).toBe('');
     expect(sticker.rotation).toBeGreaterThanOrEqual(-4);
     expect(sticker.rotation).toBeLessThanOrEqual(4);
+    expect(sticker.categoryId).toBeNull();
     expect(getBoard(board.id)?.columns[0].stickers).toEqual([sticker]);
   });
 
@@ -132,5 +139,71 @@ describe('stickers', () => {
     const column = addColumn(board.id, 'To do');
     moveSticker(board.id, 'missing-id', column.id, column.id, 0);
     expect(getBoard(board.id)?.columns[0].stickers).toEqual([]);
+  });
+});
+
+describe('categories', () => {
+  it('adds a category with a blank name and a color, cycling through the palette', () => {
+    const board = createBoard('Board');
+    const a = addCategory(board.id);
+    const b = addCategory(board.id);
+    expect(a.name).toBe('');
+    expect(a.color).toMatch(/^#[0-9a-f]{6}$/);
+    expect(b.color).not.toBe(a.color);
+    expect(getBoard(board.id)?.categories).toEqual([a, b]);
+  });
+
+  it('renames a category', () => {
+    const board = createBoard('Board');
+    const category = addCategory(board.id);
+    renameCategory(board.id, category.id, 'Urgent');
+    expect(getBoard(board.id)?.categories[0].name).toBe('Urgent');
+  });
+
+  it('recolors a category', () => {
+    const board = createBoard('Board');
+    const category = addCategory(board.id);
+    recolorCategory(board.id, category.id, '#000000');
+    expect(getBoard(board.id)?.categories[0].color).toBe('#000000');
+  });
+
+  it('deletes a category and clears it from any sticker that had it selected', () => {
+    const board = createBoard('Board');
+    const category = addCategory(board.id);
+    const column = addColumn(board.id, 'To do');
+    const sticker = addSticker(board.id, column.id);
+    setStickerCategory(board.id, column.id, sticker.id, category.id);
+
+    deleteCategory(board.id, category.id);
+
+    expect(getBoard(board.id)?.categories).toEqual([]);
+    expect(getBoard(board.id)?.columns[0].stickers[0].categoryId).toBeNull();
+  });
+
+  it('sets and clears a sticker category', () => {
+    const board = createBoard('Board');
+    const category = addCategory(board.id);
+    const column = addColumn(board.id, 'To do');
+    const sticker = addSticker(board.id, column.id);
+
+    setStickerCategory(board.id, column.id, sticker.id, category.id);
+    expect(getBoard(board.id)?.columns[0].stickers[0].categoryId).toBe(category.id);
+
+    setStickerCategory(board.id, column.id, sticker.id, null);
+    expect(getBoard(board.id)?.columns[0].stickers[0].categoryId).toBeNull();
+  });
+
+  // Regression: boards saved before this feature shipped have no
+  // `categories` field at all in their persisted localStorage JSON (not
+  // even an empty array) — reading `.find`/`.map` off that `undefined`
+  // used to throw instead of treating it as "no categories yet".
+  it('treats a board with no categories field (pre-feature localStorage data) as having none', () => {
+    const board = createBoard('Board');
+    const legacyState = { boards: [{ id: board.id, name: board.name, columns: [] }] };
+    resetIdeaBoardStoreForTests();
+    window.localStorage.setItem('software-jars:idea-board', JSON.stringify(legacyState));
+
+    expect(() => addCategory(board.id)).not.toThrow();
+    expect(getBoard(board.id)?.categories).toHaveLength(1);
   });
 });

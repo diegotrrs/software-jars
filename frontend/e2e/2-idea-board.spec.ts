@@ -100,6 +100,99 @@ test.describe('@2. idea board', () => {
     await expect(page.getByTestId('column')).toHaveCount(0);
   });
 
+  test('@2.10 adding a category from the sidebar shows it as an editable pill', async ({ page }) => {
+    await page.getByTestId('new-board').click();
+    await page.waitForURL(/\/jars\/idea-board\/.+/);
+
+    await page.getByTestId('add-category').click();
+    await expect(page.getByTestId('category-row')).toHaveCount(1);
+    await page.getByTestId('category-name-input').fill('Urgent');
+    await page.getByTestId('category-name-input').blur();
+    await expect(page.getByTestId('category-name-input')).toHaveValue('Urgent');
+  });
+
+  test('@2.11 assigning a category to a sticker via the hover palette button tints the whole card', async ({ page }) => {
+    await page.getByTestId('new-board').click();
+    await page.waitForURL(/\/jars\/idea-board\/.+/);
+
+    await page.getByTestId('add-category').click();
+    await page.getByTestId('category-name-input').fill('Urgent');
+    await page.getByTestId('category-name-input').blur();
+
+    await page.getByTestId('add-column').click();
+    await page.locator('input[data-testid="column-title"]').blur();
+    await page.getByTestId('add-sticker').click();
+    await page.locator('textarea[data-testid="sticker-text"]').blur();
+
+    // The category picker is a hover-revealed palette button — no corner
+    // indicator at rest, the whole card's own color is the only signal.
+    const sticker = page.getByTestId('sticker');
+    const badge = page.getByTestId('sticker-category-badge');
+    const uncategorizedBackground = await sticker.evaluate((el) => getComputedStyle(el).backgroundColor);
+
+    await sticker.hover();
+    await badge.click();
+    await page.getByTestId('sticker-category-option').filter({ hasText: 'Urgent' }).click();
+
+    await expect(sticker).not.toHaveCSS('background-color', uncategorizedBackground);
+  });
+
+  test('@2.12 clearing a sticker category via "None" resets the card to its default color', async ({ page }) => {
+    await page.getByTestId('new-board').click();
+    await page.waitForURL(/\/jars\/idea-board\/.+/);
+
+    await page.getByTestId('add-category').click();
+    await page.getByTestId('category-name-input').fill('Urgent');
+    await page.getByTestId('category-name-input').blur();
+    await page.getByTestId('add-column').click();
+    await page.locator('input[data-testid="column-title"]').blur();
+    await page.getByTestId('add-sticker').click();
+    await page.locator('textarea[data-testid="sticker-text"]').blur();
+
+    const sticker = page.getByTestId('sticker');
+    const badge = page.getByTestId('sticker-category-badge');
+    const uncategorizedBackground = await sticker.evaluate((el) => getComputedStyle(el).backgroundColor);
+
+    await sticker.hover();
+    await badge.click();
+    await page.getByTestId('sticker-category-option').filter({ hasText: 'Urgent' }).click();
+    await expect(sticker).not.toHaveCSS('background-color', uncategorizedBackground);
+
+    await sticker.hover();
+    await badge.click();
+    await page.getByTestId('sticker-category-option').filter({ hasText: 'None' }).click();
+
+    await expect(sticker).toHaveCSS('background-color', uncategorizedBackground);
+  });
+
+  test('@2.13 deleting a category resets any sticker that had it to the default card color', async ({ page }) => {
+    await page.getByTestId('new-board').click();
+    await page.waitForURL(/\/jars\/idea-board\/.+/);
+
+    await page.getByTestId('add-category').click();
+    await page.getByTestId('category-name-input').fill('Urgent');
+    await page.getByTestId('category-name-input').blur();
+    await page.getByTestId('add-column').click();
+    await page.locator('input[data-testid="column-title"]').blur();
+    await page.getByTestId('add-sticker').click();
+    await page.locator('textarea[data-testid="sticker-text"]').blur();
+
+    const sticker = page.getByTestId('sticker');
+    const badge = page.getByTestId('sticker-category-badge');
+    const uncategorizedBackground = await sticker.evaluate((el) => getComputedStyle(el).backgroundColor);
+
+    await sticker.hover();
+    await badge.click();
+    await page.getByTestId('sticker-category-option').filter({ hasText: 'Urgent' }).click();
+    await expect(sticker).not.toHaveCSS('background-color', uncategorizedBackground);
+
+    await page.getByTestId('category-row').hover();
+    await page.getByTestId('delete-category').click();
+
+    await expect(page.getByTestId('category-row')).toHaveCount(0);
+    await expect(sticker).toHaveCSS('background-color', uncategorizedBackground);
+  });
+
   test('@2.9 deleting a board always asks for confirmation, even when empty', async ({ page }) => {
     let dialogShown = false;
     page.on('dialog', (dialog) => {

@@ -6,6 +6,7 @@ export type Sticker = {
   id: string;
   text: string;
   rotation: number;
+  categoryId: string | null;
 };
 
 export type Column = {
@@ -14,11 +15,20 @@ export type Column = {
   stickers: Sticker[];
 };
 
+export type Category = {
+  id: string;
+  name: string;
+  color: string;
+};
+
 export type Board = {
   id: string;
   name: string;
   columns: Column[];
+  categories: Category[];
 };
+
+const NEW_CATEGORY_COLORS = ['#ef4444', '#3b82f6', '#22c55e', '#f97316', '#a855f7', '#14b8a6', '#ec4899', '#eab308'];
 
 type IdeaBoardState = {
   boards: Board[];
@@ -39,6 +49,11 @@ const generateId = (): string =>
 
 const randomStickerRotation = (): number => Math.round((Math.random() * 8 - 4) * 10) / 10;
 
+// Boards saved before categories existed have no `categories` field at all
+// in their persisted localStorage JSON — treat a missing field as "none"
+// rather than crashing on `.find`/`.map` of undefined.
+const getCategories = (board: Board): Category[] => board.categories ?? [];
+
 const updateBoard = (boardId: string, updater: (board: Board) => Board): void => {
   const state = getSnapshot();
   writeState({
@@ -51,7 +66,7 @@ export const getBoard = (boardId: string): Board | undefined =>
 
 export const createBoard = (name: string): Board => {
   const state = getSnapshot();
-  const board: Board = { id: generateId(), name, columns: [] };
+  const board: Board = { id: generateId(), name, columns: [], categories: [] };
   writeState({ boards: [...state.boards, board] });
   return board;
 };
@@ -97,8 +112,63 @@ export const reorderColumns = (boardId: string, orderedColumnIds: string[]): voi
   }));
 };
 
+export const addCategory = (boardId: string): Category => {
+  const board = getBoard(boardId);
+  const existing = board ? getCategories(board) : [];
+  const category: Category = {
+    id: generateId(),
+    name: '',
+    color: NEW_CATEGORY_COLORS[existing.length % NEW_CATEGORY_COLORS.length],
+  };
+  updateBoard(boardId, (b) => ({ ...b, categories: [...getCategories(b), category] }));
+  return category;
+};
+
+export const renameCategory = (boardId: string, categoryId: string, name: string): void => {
+  updateBoard(boardId, (board) => ({
+    ...board,
+    categories: getCategories(board).map((c) => (c.id === categoryId ? { ...c, name } : c)),
+  }));
+};
+
+export const recolorCategory = (boardId: string, categoryId: string, color: string): void => {
+  updateBoard(boardId, (board) => ({
+    ...board,
+    categories: getCategories(board).map((c) => (c.id === categoryId ? { ...c, color } : c)),
+  }));
+};
+
+// Also clears this category from any sticker that had it selected, across
+// every column, since a sticker referencing a deleted category is meaningless.
+export const deleteCategory = (boardId: string, categoryId: string): void => {
+  updateBoard(boardId, (board) => ({
+    ...board,
+    categories: getCategories(board).filter((c) => c.id !== categoryId),
+    columns: board.columns.map((column) => ({
+      ...column,
+      stickers: column.stickers.map((s) => (s.categoryId === categoryId ? { ...s, categoryId: null } : s)),
+    })),
+  }));
+};
+
+export const setStickerCategory = (
+  boardId: string,
+  columnId: string,
+  stickerId: string,
+  categoryId: string | null
+): void => {
+  updateBoard(boardId, (board) => ({
+    ...board,
+    columns: board.columns.map((column) =>
+      column.id === columnId
+        ? { ...column, stickers: column.stickers.map((s) => (s.id === stickerId ? { ...s, categoryId } : s)) }
+        : column
+    ),
+  }));
+};
+
 export const addSticker = (boardId: string, columnId: string, text = ''): Sticker => {
-  const sticker: Sticker = { id: generateId(), text, rotation: randomStickerRotation() };
+  const sticker: Sticker = { id: generateId(), text, rotation: randomStickerRotation(), categoryId: null };
   updateBoard(boardId, (board) => ({
     ...board,
     columns: board.columns.map((column) =>

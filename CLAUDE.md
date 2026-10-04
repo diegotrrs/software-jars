@@ -73,3 +73,7 @@ This file covers product intent and cross-jar decisions. Frontend
 implementation conventions (file structure, how to add a jar, i18n/nav
 usage) live in `frontend/CLAUDE.md` — prefer deriving those specifics from
 the code once it exists rather than duplicating them here.
+
+## Other
+
+Answer in plain, short sentences. Avoid long explanations unless the user asks for detail

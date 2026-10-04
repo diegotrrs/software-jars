@@ -4,14 +4,19 @@ import { EditableText } from '@/components/jars/idea-board/editable-text';
 import { PACK_DRAG_ID, StickerPack } from '@/components/jars/idea-board/sticker-pack';
 import { Button } from '@/components/ui/button';
 import {
+  addCategory,
   addColumn,
   addSticker,
   deleteBoard,
+  deleteCategory,
   deleteColumn,
   deleteSticker,
   moveSticker,
+  recolorCategory,
   renameBoard,
+  renameCategory,
   renameColumn,
+  setStickerCategory,
   updateStickerText,
   reorderColumns,
 } from '@/lib/idea-board';
@@ -45,6 +50,7 @@ export const BoardView = ({ boardId }: BoardViewProps) => {
   const [activeDragId, setActiveDragId] = useState<string | null>(null);
   const [newestStickerId, setNewestStickerId] = useState<string | null>(null);
   const [newestColumnId, setNewestColumnId] = useState<string | null>(null);
+  const [newestCategoryId, setNewestCategoryId] = useState<string | null>(null);
 
   const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 4 } }));
 
@@ -136,6 +142,13 @@ export const BoardView = ({ boardId }: BoardViewProps) => {
     deleteColumn(board.id, columnId);
   };
 
+  const handleAddCategory = () => {
+    const category = addCategory(board.id);
+    setNewestCategoryId(category.id);
+  };
+
+  const categories = board.categories ?? [];
+
   return (
     <div className='flex h-[calc(100vh-3.5rem)] flex-col'>
       <div className='flex items-center gap-3 border-b px-4 py-2'>
@@ -162,7 +175,14 @@ export const BoardView = ({ boardId }: BoardViewProps) => {
 
       <DndContext sensors={sensors} onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
         <div className='flex flex-1 overflow-hidden'>
-          <StickerPack />
+          <StickerPack
+            categories={categories}
+            newestCategoryId={newestCategoryId}
+            onAddCategory={handleAddCategory}
+            onRenameCategory={(categoryId, name) => renameCategory(board.id, categoryId, name)}
+            onRecolorCategory={(categoryId, color) => recolorCategory(board.id, categoryId, color)}
+            onDeleteCategory={(categoryId) => deleteCategory(board.id, categoryId)}
+          />
 
           <div className='flex flex-1 gap-4 overflow-x-auto p-4'>
             <SortableContext items={board.columns.map((c) => columnDragId(c.id))}>
@@ -172,6 +192,7 @@ export const BoardView = ({ boardId }: BoardViewProps) => {
                   column={column}
                   autoFocusTitle={column.id === newestColumnId}
                   newestStickerId={newestStickerId}
+                  categories={categories}
                   onRename={(title) => renameColumn(board.id, column.id, title)}
                   onDelete={() => handleDeleteColumn(column.id, column.title, column.stickers.length)}
                   onAddSticker={() => {
@@ -180,6 +201,9 @@ export const BoardView = ({ boardId }: BoardViewProps) => {
                   }}
                   onStickerTextChange={(stickerId, text) => updateStickerText(board.id, column.id, stickerId, text)}
                   onStickerDelete={(stickerId) => deleteSticker(board.id, column.id, stickerId)}
+                  onStickerCategoryChange={(stickerId, categoryId) =>
+                    setStickerCategory(board.id, column.id, stickerId, categoryId)
+                  }
                 />
               ))}
             </SortableContext>

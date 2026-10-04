@@ -66,7 +66,15 @@
     "addSticker": "Añadir nota",
     "deleteSticker": "Eliminar nota",
     "pack": "Arrastra una nota desde aquí",
-    "stickerPlaceholder": "Escribe una idea…"
+    "stickerPlaceholder": "Escribe una idea…",
+    "categoriesTitle": "Categorías",
+    "addNewCategory": "+ Añadir nueva",
+    "untitledCategory": "Categoría sin título",
+    "newCategoryPlaceholder": "Nueva categoría",
+    "changeCategory": "Cambiar categoría",
+    "noCategory": "Ninguna",
+    "categoryColorLabel": "Color de {name}",
+    "deleteCategory": "Eliminar {name}"
   },
   "ideaMatrix": {
     "newProject": "Nuevo proyecto",

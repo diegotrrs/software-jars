@@ -66,7 +66,15 @@
     "addSticker": "Add sticker",
     "deleteSticker": "Delete sticker",
     "pack": "Drag a sticker from here",
-    "stickerPlaceholder": "Type an idea…"
+    "stickerPlaceholder": "Type an idea…",
+    "categoriesTitle": "Categories",
+    "addNewCategory": "+ Add new",
+    "untitledCategory": "Untitled category",
+    "newCategoryPlaceholder": "New category",
+    "changeCategory": "Change category",
+    "noCategory": "None",
+    "categoryColorLabel": "{name} color",
+    "deleteCategory": "Delete {name}"
   },
   "ideaMatrix": {
     "newProject": "New project",
